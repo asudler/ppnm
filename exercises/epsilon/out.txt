@@ -1,0 +1,18 @@
+my max int = 2147483647
+system max value = 2147483647
+my min int = -2147483648
+system min value = -2147483648
+my double precision = 2.22044604925031E-16
+approx sys double precision = 1.11022302462516E-16
+my float precision = 1.192093E-07
+approx sys float precision = 1.19209289550781E-07
+a==b ? False
+a>1  ? False
+b>1  ? True
+explanation: rounding differences.
+for 'a', 'tiny' is rounded to 0 since there already exists a single-digit number before the addition operation.
+for 'b', 'tiny' + 'tiny' is calculated and then added to 1, which gives an answer greater than 0.
+d1=7.999999999999999e-001
+d2=8.000000000000000e-001
+d1==d2 ? => False
+d1 approx d2 ? => True
