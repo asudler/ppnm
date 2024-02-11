@@ -26,15 +26,43 @@ class main {
         }
 
         // testing methods
-        Write("testing u.dot(u) = u.norm()*u.norm() ...");
+        Write("testing u.dot(u) = u.norm()*u.norm() ... ");
         test = true;
         for(int i = 0; i < n; i++) {
             vec u = vecs[i];
-            test = test && vec.approx();
+            test = test && vec.approx(u.dot(u), u.norm()*u.norm()); 
         }
         if(test) Write("passed\n");
         else { Write("FAILED\n"); return_code += 1; }
 
-        return 0;
-    }
-}
+        Write("testing u.cross(v) = -v.cross(u) ... ");
+        test = true;
+        for(int i = 0; i < n-1; i++) {
+            vec u = vecs[i]; vec v = vecs[i+1];
+            test = test && u.cross(v).approx(-v.cross(u));
+        }
+        if(test) Write("passed\n");
+        else { Write("FAILED\n"); return_code += 1; }
+
+        Write("testing (u + v).cross(w) = u.cross(w) + v.cross(w) ... ");
+        test = true;
+        for(int i = 0; i < n-2; i++) {
+            vec u = vecs[i]; 
+            vec v = vecs[i+1];
+            vec w = vecs[i+2];
+            test = test && (u+v).cross(w).approx(u.cross(w) + v.cross(w));
+        }
+        if(test) Write("passed\n");
+        else { Write("FAILED\n"); return_code += 1; }
+
+        // conclusion
+        if(return_code == 0) {
+            WriteLine("all tests passed");
+        }
+        else {
+            WriteLine("{0} tests failed. kys", return_code);
+        }
+
+        return return_code;
+    } // Main
+} // main
