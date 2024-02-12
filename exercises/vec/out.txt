@@ -3,4 +3,4 @@ testing manual vector assignment ... 69 420 3.14
 testing u.dot(u) = u.norm()*u.norm() ... passed
 testing u.cross(v) = -v.cross(u) ... passed
 testing (u + v).cross(w) = u.cross(w) + v.cross(w) ... passed
-4 tests failed. kys
+all tests passed
