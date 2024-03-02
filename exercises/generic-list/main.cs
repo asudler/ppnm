@@ -2,8 +2,8 @@ using System;
 using static System.Console;
 
 class main {
-    static int Main() {
-        var list = new genlist<double>();
+    public static int Main() {
+        var list = new genlist<double[]>();
         char[] delimiters = {' ', '\t'};
         var options = StringSplitOptions.RemoveEmptyEntries;
         for(string line = ReadLine(); line!=null; line = ReadLine()) {
