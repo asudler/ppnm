@@ -27,7 +27,7 @@ out.gamma.gnuplot.svg : gamma.txt makefile
 		set title "gamma function" ;\
 		set tics out ;\
 		set grid ;\
-		plot [-0:4.5] \
+		plot [-4:4.5] \
 			"$<" with lines, \
 			"gamma.data.txt" using 1:2 with points pointtype 6, \
 	' | tee log.gpi  | gnuplot
