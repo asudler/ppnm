@@ -1,0 +1,12 @@
+\
+	set terminal svg background "white" ;\
+	set out "out.lngamma.gnuplot.svg" ;\
+	set xlabel "x" ;\
+	set ylabel "ln(gamma(x))" ;\
+	set title "ln gamma function" ;\
+	set tics out ;\
+	set grid ;\
+	plot [0:4.5] \
+		"lngamma.txt" with lines, \
+		"lngamma.data.txt" using 1:2 with points pointtype 6, \
+
