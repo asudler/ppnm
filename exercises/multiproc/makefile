@@ -4,9 +4,9 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 TIME = time --output=$@ --append --format "$$nthreads %e %U"
 
-out.times.svg : out.times.txt makefile
+out.times.png : out.times.txt makefile
 	echo '\
-		set terminal svg background "white" ;\
+		set terminal png background "white" ;\
 		set out "$@" ;\
 		set xlabel "number of threads" ;\
 		set ylabel "real time" ;\
@@ -14,9 +14,9 @@ out.times.svg : out.times.txt makefile
 		plot "$<" u 1:2 w lp title "real time" ;\
 		plot "$<" u 1:3 w lp title "user time" ;\
 	' | tee log.gpi | gnuplot
-out.parallelfor.svg : out.parallelfor.txt makefile
+out.parallelfor.png : out.parallelfor.txt makefile
 	echo '\
-		set terminal svg background "white" ;\
+		set terminal png background "white" ;\
 		set out "$@" ;\
 		set xlabel "number of threads" ;\
 		set ylabel "real time" ;\
@@ -24,9 +24,9 @@ out.parallelfor.svg : out.parallelfor.txt makefile
 		plot "$<" u 1:2 w lp title "real time" ;\
 		plot "$<" u 1:3 w lp title "user time" ;\
 	' | tee log.gpi | gnuplot
-out.linq.svg : out.linq.txt makefile
+out.linq.png : out.linq.txt makefile
 	echo '\
-		set terminal svg background "white" ;\
+		set terminal png background "white" ;\
 		set out "$@" ;\
 		set xlabel "number of threads" ;\
 		set ylabel "real time" ;\
