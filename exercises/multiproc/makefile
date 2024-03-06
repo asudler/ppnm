@@ -9,7 +9,7 @@ out.times.png : out.times.txt makefile
 		set terminal png background "white" ;\
 		set out "$@" ;\
 		set xlabel "number of threads" ;\
-		set ylabel "real time (s)" ;\
+		set ylabel "real time in s" ;\
 		set title "running time as a fcn of number of threads" ;\
 		plot "$<" u 1:2 w lp title "real time" ;\
 		plot "$<" u 1:3 w lp title "user time" ;\
