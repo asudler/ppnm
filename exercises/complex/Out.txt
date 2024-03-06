@@ -1,0 +1,26 @@
+testing explicit cast from int ...  1+0i  ...passed
+testing explicit cast from double ...  1+0i  ...passed
+testing exp(log(z))=z ... ...passed
+testing log(exp(z))=z ... ...passed
+testing abs(z)^2=z*conjugate(z) ... ...passed
+testing sqrt(a)*sqrt(a)=a ... ...passed
+testing sin(a)^2+cos(a)^2=1 ... ...passed
+testing sin(a+b)=sin(a)*cos(b)+cos(a)*sin(b) ... ...passed
+testing (a/b)*b=a ... ...passed
+testing exp(a+b)=exp(a)*exp(b) ... ...passed
+testing cos(a+b)=cos(a)*cos(b)-sin(a)*sin(b) ... ...passed
+testing abs(z)*exp(I*arg(z))=z ... ...passed
+
+
+now performing the tests outlined in the exercise description
+sqrt(-1) ?= 1j ......passed
+sqrt(1j) ?= 1/sqrt(2) + 1j/sqrt(2) ......passed
+exp(1j) ?= cos(1) + 1j*sin(1) ... ...passed
+exp(1j*pi) ?= -1 .......passed
+1j^1j ?= exp(-pi/2) ... ...passed
+ln(1j) ?= 1j*pi/2 ... ...passed
+sin(1j*pi) ?= (1/2j)*[exp(-pi)-exp(pi)] ......passed
+EXTRA: sinh(1j) ?= 1j*sin(1) ... ...passed
+EXTRA: cosh(1j) ?= cos(1) ... ...passed
+
+all tests passed :)
