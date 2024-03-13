@@ -66,8 +66,6 @@ public partial class qrgs {
             inverse[i] = sol;
         }
         return inverse;
-    }
-
-
+    } // inverse
 } // qrgs
 

@@ -127,12 +127,7 @@ public class main {
         return 0;
     }
 
-    public static int operations_count() {
-    
-        return 0;
-    }
-
-    public static int Main() {
+    public static int Main(string[] args) {
         check_decomp();
         check_solve();
         check_inverse();
