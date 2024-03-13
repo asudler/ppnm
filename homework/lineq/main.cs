@@ -127,7 +127,7 @@ public class main {
         return 0;
     }
 
-    public static int Main(string[] args) {
+    public static int Main() {
         check_decomp();
         check_solve();
         check_inverse();
