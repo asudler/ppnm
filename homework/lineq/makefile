@@ -13,7 +13,7 @@ out.times.png : out.times.data makefile
 		f(x)=A*x**3+bg ; \
 		A=5e-9 ; \
 		bg=0.02 ; \
-		fit f(x) 'out.times.data' via A, bg ; \
+		fit f(x) "out.times.data" via A, bg ; \
 		plot "$<" u 1:2 w lp title "real time" , \
 		f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 	' | tee log.gpi | gnuplot
