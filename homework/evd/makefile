@@ -7,11 +7,17 @@ out.wavefunctions.png : out.wavefunctions.data makefile
 	echo '\
 		set terminal png background "white" ; \
 		set out "$@" ; \
-		set xlabel "???" ; \
+		set xlabel "r (Bohr radius)" ; \
 		set ylabel "radial hydrogen wavefunction" ; \
-		plot "$<" u 0:1 skip 2 w lp title "ground state" , \
-		"" u 0:2 skip 2 w lp title "1st excited state", \
-		"" u 0:3 skip 2 w lp title "2nd excited state" ; \
+		f0(x) = 2*x*exp(-x) ; \
+		f1(x) = -x*(1-x/2)*exp(-x/2)/sqrt(2) ; \
+		f2(x) = 2*x*(1-2*x/3 + 2*x*x/27)*exp(-x/3)/sqrt(27) ; \
+		plot "$<" u ($$0*0.05):1 skip 2 w lp title "numeric ground state" , \
+		"" u ($$0*0.05):2 skip 2 w lp title "numeric 1st excited state" , \
+		"" u ($$0*0.05):3 skip 2 w lp title "numeric 2nd excited state" , \
+		f0(x) w l lw 2 title "analytic ground state" , \
+		f1(x) w l lw 2 title "analytic 1st excited state" , \
+		f2(x) w l lw 2 title "analytic 2nd excited state" ; \
 	' | tee log.gpi | gnuplot
 
 out.wavefunctions.data : main.exe
