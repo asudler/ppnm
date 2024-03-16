@@ -21,7 +21,7 @@ out.wavefunctions.png : out.wavefunctions.data makefile
 	' | tee log.gpi | gnuplot
 
 out.wavefunctions.data : main.exe
-	mono $< -partb -rmax:10 -dr:0.05 -wavefunctions > $@
+	mono $< -partb -rmax:20 -dr:0.05 -wavefunctions > $@
 
 out.convergence.change_rmax.png : out.convergence.change_rmax.data makefile
 	echo '\
