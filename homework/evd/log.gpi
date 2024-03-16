@@ -1,15 +1,8 @@
 \
 	set terminal png background "white" ; \
-	set out "out.wavefunctions.png" ; \
-	set xlabel "r (Bohr radius)" ; \
-	set ylabel "radial hydrogen wavefunction" ; \
-	f0(x) = 2*x*exp(-x) ; \
-	f1(x) = -x*(1-x/2)*exp(-x/2)/sqrt(2) ; \
-	f2(x) = 2*x*(1-2*x/3 + 2*x*x/27)*exp(-x/3)/sqrt(27) ; \
-	plot "out.wavefunctions.data" u ($0*0.05):1 skip 2 w lp title "numeric ground state" , \
-	"" u ($0*0.05):2 skip 2 w lp title "numeric 1st excited state" , \
-	"" u ($0*0.05):3 skip 2 w lp title "numeric 2nd excited state" , \
-	f0(x) w l lw 2 title "analytic ground state" , \
-	f1(x) w l lw 2 title "analytic 1st excited state" , \
-	f2(x) w l lw 2 title "analytic 2nd excited state" ; \
+	set out "out.convergence.change_dr.png" ; \
+	set xlabel "dr (Bohr radius)" ; \
+	set ylabel "E0 (Hartree)" ; \
+	set title "convergence check with dr" ; \
+	plot "out.convergence.change_dr.data" every ::1 u 2:3 w lp ; \
 

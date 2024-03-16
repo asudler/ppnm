@@ -1,4 +1,4 @@
-CODE = $(filter %.cs, $^)
+plot "$<" u 1:2 w lpCODE = $(filter %.cs, $^)
 LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)

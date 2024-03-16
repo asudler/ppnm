@@ -1,0 +1,7 @@
+##### HOMEWORK EVD PART (A): checking cyclic... #####
+generating a random symmetric 300x300 matrix A with random entries between 0 and 1...done
+performing jacobi diagonalization on matrix A using cyclic sweeps...done
+checking that V*(V^T) == 1...passed
+checking that (V^T)*V == 1...passed
+checking that (V^T)*A*V == D where the columns of D are zero except along the diagonal where instead they should equal the eigenvalue...passed
+checking that V*D*(V^T) == A...passed
