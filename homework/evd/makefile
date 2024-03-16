@@ -55,6 +55,9 @@ out.convergence.change_dr.data : main.exe
 		mono $< -partb -rmax:10 -dr:$$dr >> $@ -convergence ; \
 	done
 
+out.parta.data : main.exe
+	mono $< -parta > $@
+
 main.exe : main.cs jacobi.dll ; $(MKEXE)
 jacobi.dll : matrix.cs vector.cs jacobi.cs ; $(MKLIB)
 
