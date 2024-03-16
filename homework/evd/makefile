@@ -3,6 +3,17 @@ LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 
+out.wavefunctions.png : out.wavefunctions.data makefile
+	echo '\
+		set terminal png background "white" ; \
+		set out "$@" ; \
+		set xlabel "???" ; \
+		set ylabel "radial hydrogen wavefunction" ; \
+		plot "$<" u 0:1 skip 2 w lp title "ground state" , \
+		"" u 0:2 skip 2 w lp title "1st excited state", \
+		"" u 0:3 skip 2 w lp title "2nd excited state" ; \
+	' | tee log.gpi | gnuplot
+
 out.wavefunctions.data : main.exe
 	mono $< -partb -rmax:10 -dr:0.05 -wavefunctions > $@
 

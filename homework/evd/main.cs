@@ -119,9 +119,20 @@ public class main {
             Write($"{rmax}\t{dr}\t{eigenvalues[0]}\n");
         }
 
-        // (5) (optional) normalized wavefunctions
-        if(wavefunctions) {
-            double c = 1/Sqrt(dr);
+        // (5) check normalization condition on wavefunctions
+        double c = 1/Sqrt(dr);
+        bool check = true;
+        for(int i = 0; i < eigenvectors.size2; i++) {
+            double sum = 0;
+            for(int j = 0; j < eigenvectors.size1; j++) {
+                sum += Pow(c*eigenvectors[j,i], 2)*dr;
+            }
+            if(!approx(sum,1)) {
+                check = false;
+                WriteLine($"{sum}");
+            }
+        }
+        if(wavefunctions && check) {
             Write("each column gives the k-th eigenvector ");
             Write("of the Hamiltonian matrix...\n");
             for(int i = 0; i < eigenvectors.size1; i++) {
