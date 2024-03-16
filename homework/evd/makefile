@@ -6,11 +6,31 @@ MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 out.wavefunctions.data : main.exe
 	mono $< -partb -rmax:10 -dr:0.05 -wavefunctions > $@
 
+out.convergence.change_rmax.png : out.convergence.change_rmax.data makefile
+	echo '\
+		set terminal png background "white" ; \
+		set out "$@" ; \
+		set xlabel "rmax (Bohr radius)" ; \
+		set ylabel "E0 (Hartree)" ; \
+		set title "convergence check with rmax" ; \
+		plot "$<" every ::1 u 1:3 w lp ; \
+	' | tee log.gpi | gnuplot
+
 out.convergence.change_rmax.data : main.exe
 	$(RM) $@ ; \
 	for rmax in $$(seq 1 1 20) ; do \
 		mono $< -partb -rmax:$$rmax -dr:0.1 -convergence >> $@ ; \
 	done
+
+out.convergence.change_dr.png : out.convergence.change_dr.data makefile
+	echo '\
+		set terminal png background "white" ; \
+		set out "$@" ; \
+		set xlabel "dr (Bohr radius)" ; \
+		set ylabel "E0 (Hartree)" ; \
+		set title "convergence check with dr" ; \
+		plot "$<" every ::1 u 2:3 w lp ; \
+	' | tee log.gpi | gnuplot
 
 out.convergence.change_dr.data : main.exe
 	$(RM) $@ ; \
