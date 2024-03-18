@@ -48,7 +48,7 @@ out/out.wavefunctions.png : out/out.wavefunctions.data makefile
 		f0(x) w l lw 2 title "analytic ground state" , \
 		f1(x) w l lw 2 title "analytic 1st excited state" , \
 		f2(x) w l lw 2 title "analytic 2nd excited state" ; \
-	' | tee log.gpi | gnuplot
+	' | tee out/log.gpi | gnuplot
 
 out/out.wavefunctions.data : main.exe
 	mono $< -partb -rmax:20 -dr:0.05 -wavefunctions > $@ 2>> out/out.partb.log
@@ -61,7 +61,7 @@ out/out.convergence.change_rmax.png : out/out.convergence.change_rmax.data makef
 		set ylabel "E0 (Hartree)" ; \
 		set title "convergence check with rmax" ; \
 		plot "$<" every ::1 u 1:3 w lp ; \
-	' | tee log.gpi | gnuplot
+	' | tee out/log.gpi | gnuplot
 
 out/out.convergence.change_rmax.data : main.exe
 	$(RM) $@ ; \
@@ -78,7 +78,7 @@ out/out.convergence.change_dr.png : out/out.convergence.change_dr.data makefile
 		set ylabel "E0 (Hartree)" ; \
 		set title "convergence check with dr" ; \
 		plot "$<" every ::1 u 2:3 w lp ; \
-	' | tee log.gpi | gnuplot
+	' | tee out/log.gpi | gnuplot
 
 out/out.convergence.change_dr.data : main.exe
 	$(RM) $@ ; \
