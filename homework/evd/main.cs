@@ -10,11 +10,11 @@ public class main {
      * checks the functionality of the cyclic
      * function from the jacobi library */
     public static void check_cyclic() {
-        Write("##### HOMEWORK EVD PART (A): checking cyclic... #####\n");
+        Error.Write("##### HOMEWORK EVD PART (A): checking cyclic... #####\n");
         
         int n = 300; // size of matrix
-        Write($"generating a random symmetric {n}x{n} matrix A ");
-        Write("with random entries between 0 and 1...");
+        Error.Write($"generating a random symmetric {n}x{n} matrix A ");
+        Error.Write("with random entries between 0 and 1...");
         Random rnd = new Random();
         matrix A = new matrix(n, n);
         for(int i = 0; i < n; i++) {
@@ -23,55 +23,55 @@ public class main {
                 A[j,i] = A[i,j];
             }
         }
-        Write("done\n");
+        Error.Write("done\n");
 
-        Write("performing jacobi diagonalization on matrix A ");
-        Write("using cyclic sweeps...");
+        Error.Write("performing jacobi diagonalization on matrix A ");
+        Error.Write("using cyclic sweeps...");
         var help = cyclic(A);
         vector w = help.Item1;
         matrix V = help.Item2;
-        Write("done\n");
+        Error.Write("done\n");
 
-        Write("checking that V*(V^T) == 1...");
+        Error.Write("checking that V*(V^T) == 1...");
         matrix mcheck = new matrix(n, n);
         mcheck = V*V.transpose();
         matrix I = new matrix(n, n);
         I.set_identity();
         bool test = true;
         if(!mcheck.approx(I)) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n");
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n");
     
-        Write("checking that (V^T)*V == 1...");
+        Error.Write("checking that (V^T)*V == 1...");
         mcheck = V.transpose()*V;
         test = true;
         if(!mcheck.approx(I)) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n"); 
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n"); 
 
-        Write("checking that (V^T)*A*V == D where ");
-        Write("the columns of D are zero except ");
-        Write("along the diagonal where instead ");
-        Write("they should equal the eigenvalue...");
+        Error.Write("checking that (V^T)*A*V == D where ");
+        Error.Write("the columns of D are zero except ");
+        Error.Write("along the diagonal where instead ");
+        Error.Write("they should equal the eigenvalue...");
         test = true;
         mcheck = V.transpose()*A*V;
         for(int i = 0; i < mcheck.size1; i++) {
             if(!approx(mcheck[i,i], w[i])) test = false;
         }
-        if(test) Write("passed\n");
-        else Write("womp womp\n"); 
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n"); 
 
-        Write("checking that V*D*(V^T) == A...");
+        Error.Write("checking that V*D*(V^T) == A...");
         test = true;
         if(!A.approx(V*mcheck*V.transpose())) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n");
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n");
     } // check_cyclic
 
     /* hydrogen_grid:
      * uhh see part (b) of the assignment */
     public static void hydrogen_grid(string[] args) {
-        Write("##### HOMEWORK EVD PART (b): hydrogen #####\n");
+        Error.Write("##### HOMEWORK EVD PART (b): hydrogen #####\n");
 
         // (1) get parameters
         double rmax = 0, dr = 0;
@@ -85,15 +85,15 @@ public class main {
         }
         if(rmax == 0) {
             rmax = 10.0;
-            Write("no user value provided for rmax, ");
-            Write("so a genie has provided its value: ");
-            Write("rmax = 10.0 :)\n");
+            Error.Write("no user value provided for rmax, ");
+            Error.Write("so a genie has provided its value: ");
+            Error.Write("rmax = 10.0 :)\n");
         }
         if(dr == 0) {
             dr = 0.3;
-            Write("no user value provided for dr, ");
-            Write("so a genie has provided its value: ");
-            Write("rmax = 0.3 :)\n");
+            Error.Write("no user value provided for dr, ");
+            Error.Write("so a genie has provided its value: ");
+            Error.Write("rmax = 0.3 :)\n");
         }
 
         // (2) set up Hamiltonian matrix
@@ -129,7 +129,7 @@ public class main {
             }
             if(!approx(sum,1)) {
                 check = false;
-                WriteLine($"{sum}");
+                Error.WriteLine($"{sum}");
             }
         }
         if(wavefunctions && check) {
@@ -144,10 +144,32 @@ public class main {
         }
     } // hydrogen_grid
 
+    public static void check_nops(string[] args) {
+        Error.Write("##### HOMEWORK EVD PART (c): ");
+        Error.Write("check operation scaling #####\n");
+        
+        int size = 0;
+        foreach(string arg in args) {
+            var words = arg.Split(":");
+            if(words[0] == "-size") size = (int)double.Parse(words[1]);
+        }
+        
+        Random rnd = new Random();
+        matrix A = new matrix(size, size);
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j <= i; j++) {
+                A[i,j] = rnd.NextDouble();
+                A[j,i] = A[i,j];
+            }
+        }
+        cyclic(A);
+    }
+
     public static int Main(string[] args) {
         foreach(string arg in args) {
             if(arg == "-parta") check_cyclic();
             if(arg == "-partb") hydrogen_grid(args);
+            if(arg == "-partc") check_nops(args);
         }
         return 0;
     } // Main

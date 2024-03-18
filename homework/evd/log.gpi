@@ -1,8 +1,8 @@
 \
 	set terminal png background "white" ; \
-	set out "out.convergence.change_dr.png" ; \
+	set out "out/out.convergence.change_dr.png" ; \
 	set xlabel "dr (Bohr radius)" ; \
 	set ylabel "E0 (Hartree)" ; \
 	set title "convergence check with dr" ; \
-	plot "out.convergence.change_dr.data" every ::1 u 2:3 w lp ; \
+	plot "out/out.convergence.change_dr.data" every ::1 u 2:3 w lp ; \
 

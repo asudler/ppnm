@@ -2,8 +2,38 @@ CODE = $(filter %.cs, $^)
 LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
+TIME = time --append --format "$$N %e"
 
-out.wavefunctions.png : out.wavefunctions.data makefile
+# nbatch = 16
+# out.times.data : main.exe
+# 	for N in $$(seq 20 1 400) ; do \
+#		((i=i%nbatch)); ((i++==0)) && wait ; \
+#		$(TIME) mono $< -partc -size:$$N & \
+#	done
+
+out :
+	mkdir out
+
+all: makenames
+
+Ns := $(shell seq 20 20 200)
+DATA :=
+makenames:
+	$(foreach N,$(Ns),$(addsuffix $(DATA),out.$(N).data))
+
+#.PHONEY: data
+$(DATA) : main.exe
+	for N in $(Ns) ; do \
+		\time --format "$$N %e" --output=out.$$N.data  mono $< -partc -size:$$N & \
+	done; wait
+
+test: $(DATA)
+
+REALDATA: $(DATA)
+	for N in $(Ns) ; do \
+		cat out.$$N.data >> $@ ; done
+
+out/out.wavefunctions.png : out/out.wavefunctions.data makefile
 	echo '\
 		set terminal png background "white" ; \
 		set out "$@" ; \
@@ -20,10 +50,10 @@ out.wavefunctions.png : out.wavefunctions.data makefile
 		f2(x) w l lw 2 title "analytic 2nd excited state" ; \
 	' | tee log.gpi | gnuplot
 
-out.wavefunctions.data : main.exe
-	mono $< -partb -rmax:20 -dr:0.05 -wavefunctions > $@
+out/out.wavefunctions.data : main.exe
+	mono $< -partb -rmax:20 -dr:0.05 -wavefunctions > $@ 2>> out/out.partb.log
 
-out.convergence.change_rmax.png : out.convergence.change_rmax.data makefile
+out/out.convergence.change_rmax.png : out/out.convergence.change_rmax.data makefile
 	echo '\
 		set terminal png background "white" ; \
 		set out "$@" ; \
@@ -33,13 +63,14 @@ out.convergence.change_rmax.png : out.convergence.change_rmax.data makefile
 		plot "$<" every ::1 u 1:3 w lp ; \
 	' | tee log.gpi | gnuplot
 
-out.convergence.change_rmax.data : main.exe
+out/out.convergence.change_rmax.data : main.exe
 	$(RM) $@ ; \
 	for rmax in $$(seq 1 1 20) ; do \
-		mono $< -partb -rmax:$$rmax -dr:0.1 -convergence >> $@ ; \
+		mono $< -partb -rmax:$$rmax -dr:0.1 -convergence >> $@ \
+	   	2>> out/out.partb.log ; \
 	done
 
-out.convergence.change_dr.png : out.convergence.change_dr.data makefile
+out/out.convergence.change_dr.png : out/out.convergence.change_dr.data makefile
 	echo '\
 		set terminal png background "white" ; \
 		set out "$@" ; \
@@ -49,14 +80,15 @@ out.convergence.change_dr.png : out.convergence.change_dr.data makefile
 		plot "$<" every ::1 u 2:3 w lp ; \
 	' | tee log.gpi | gnuplot
 
-out.convergence.change_dr.data : main.exe
+out/out.convergence.change_dr.data : main.exe
 	$(RM) $@ ; \
 	for dr in $$(seq 0.01 0.01 0.3) ; do \
-		mono $< -partb -rmax:10 -dr:$$dr >> $@ -convergence ; \
+		mono $< -partb -rmax:10 -dr:$$dr -convergence >> $@ \
+		2>> out/out.partb.log ; \
 	done
 
-out.parta.data : main.exe
-	mono $< -parta > $@
+out/out.parta.log : main.exe
+	mono $< -parta 2> $@
 
 main.exe : main.cs jacobi.dll ; $(MKEXE)
 jacobi.dll : matrix.cs vector.cs jacobi.cs ; $(MKLIB)
