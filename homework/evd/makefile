@@ -4,34 +4,36 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 TIME = time --append --format "$$N %e"
 
-# nbatch = 16
-# out.times.data : main.exe
-# 	for N in $$(seq 20 1 400) ; do \
-#		((i=i%nbatch)); ((i++==0)) && wait ; \
-#		$(TIME) mono $< -partc -size:$$N & \
-#	done
-
 out :
 	mkdir out
 
-all: makenames
+out/out.times.png : out/out.times.data makefile
+	echo '\
+		set terminal png background "white" ; \
+		set out "$@" ; \
+		set xlabel "N (size of matrix)" ; \
+		set ylabel "real time (s)" ; \
+		set title "real time vs N" ; \
+		f(x)=A*x**3+bg ; \
+		A=5e-9 ; \
+		bg=0.02 ; \
+		fit f(x) "$<" via A, bg ; \
+		plot "$<" u 1:2 w lp title "real time" , \
+		f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
+	' | tee out/log.gpi | gnuplot
 
-Ns := $(shell seq 20 20 200)
-DATA :=
-makenames:
-	$(foreach N,$(Ns),$(addsuffix $(DATA),out.$(N).data))
+Ns := $(shell seq 20 1 200)
 
-#.PHONEY: data
-$(DATA) : main.exe
+out/out.times.data : main.exe
+	$(RM) $@
 	for N in $(Ns) ; do \
-		\time --format "$$N %e" --output=out.$$N.data  mono $< -partc -size:$$N & \
-	done; wait
-
-test: $(DATA)
-
-REALDATA: $(DATA)
-	for N in $(Ns) ; do \
-		cat out.$$N.data >> $@ ; done
+		sleep 0.1s ; \
+		time -ao out/log.$$N.tmp -f "$$N %e" \
+		mono $< -partc -size:$$N 2> /dev/null & \
+	done ; wait
+	> $@
+	for N in $(Ns); do cat out/log.$$N.tmp >> $@ ; done
+	$(RM) out/*.tmp
 
 out/out.wavefunctions.png : out/out.wavefunctions.data makefile
 	echo '\

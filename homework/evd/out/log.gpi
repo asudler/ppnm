@@ -1,8 +1,13 @@
 \
 	set terminal png background "white" ; \
-	set out "out/out.convergence.change_dr.png" ; \
-	set xlabel "dr (Bohr radius)" ; \
-	set ylabel "E0 (Hartree)" ; \
-	set title "convergence check with dr" ; \
-	plot "out/out.convergence.change_dr.data" every ::1 u 2:3 w lp ; \
+	set out "out/out.times.png" ; \
+	set xlabel "N (size of matrix)" ; \
+	set ylabel "real time (s)" ; \
+	set title "real time vs N" ; \
+	f(x)=A*x**3+bg ; \
+	A=5e-9 ; \
+	bg=0.02 ; \
+	fit f(x) "out/out.times.data" via A, bg ; \
+	plot "out/out.times.data" u 1:2 w lp title "real time" , \
+	f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 
