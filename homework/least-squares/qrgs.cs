@@ -29,9 +29,9 @@ public partial class qrgs {
         matrix R = decomp(A).Item2;
         vector x = new vector(A.size2);
         vector rhs = Q.transpose()*b;
-        for(int i = b.size-1; i >= 0; i--) {
+        for(int i = rhs.size-1; i >= 0; i--) {
             double sum = 0;
-            for(int j = i+1; j < b.size; j++) {
+            for(int j = i+1; j < rhs.size; j++) {
                 sum += R[i,j]*x[j];
             }
             x[i] = (rhs[i] - sum)/R[i,i];

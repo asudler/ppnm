@@ -11,7 +11,6 @@ public static class ls {
                 A[i,j] = fs[j](x[i])/dy[i];
             }
         }
-        vector c = qrgs.solve(A, b);
-        return c;    
+        return qrgs.solve(A, b);
     }
 }
