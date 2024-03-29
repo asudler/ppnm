@@ -14,3 +14,7 @@ _Determining half-life time from fit_:
 
 The fit gives $\lambda=0.171 \ \text{days}^{-1}$, so the half-life time $T_{\frac{1}{2}} = \frac{\ln 2}{\lambda} \approx 4.05 \ \text{days}$. The [accepted value for the half-life of Radium-224](https://en.wikipedia.org/wiki/Isotopes_of_radium) is 3.63 days, so we're a bit off from what's currently accepted.
 
+_Estimating the uncertainty in half-life value_:
+
+We will have to use [error propagation](https://en.wikipedia.org/wiki/Propagation_of_uncertainty) to solve this question. The calculated uncertainty in $\lambda$ is 0.00716. Then the uncertainty in our half-life measurement is (hopefully) given by $\abs{\frac{\ln 2}{\lambda}}\frac{\delta_{lambda}}{lambda},$ which is 0.17 days. This is significantly higher than the modern value for estimated uncertainty (see the link to the Radium-224 Wikipedia page above).
+
