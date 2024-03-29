@@ -6,6 +6,11 @@ vector.cs: from prior homework "evd" (originally provided by Dmitri).
 
 # 2024-03-29: Answering the HW Questions
 
-_The uncertainty of the logarithm of a dataset (from [UMass](https://tex.stackexchange.com/questions/225523/how-to-write-partial-differential-equation-ex-dq-dt-ds-dt-with-real-partial-d)):_
+_The uncertainty of the logarithm of a dataset (from [UMass](https://openbooks.library.umass.edu/p132-lab-manual/chapter/uncertainty-for-natural-logarithms/)):_
 
-Given a function of a single variable $f(y)$, the uncertainty on $f$, called $\delta_f$, is related to the uncertainty on $y$, called $\delta_y$, through the formula $$\delta_f = \sqrt{\left(\frac{df,dy})^2 \delta_y^2}.$$ 
+Given a function of a single variable $f(y)$, the uncertainty on $f$, called $\delta_f$, is related to the uncertainty on $y$, called $\delta_y$, through the formula $$\delta_f = \sqrt{\left(\frac{df,dy} \right)^2 \delta_y^2}.$$ Since we have $f = \ln y$, $$\delta_f = \sqrt{\left(\frac{1, z} \right)^2 \delta_y^2} = \frac{\delta_y, y}.$$
+
+_Determining half-life time from fit_:
+
+The fit gives $\lambda=0.171$, so the half-life time $T_{\frac{1,2}} = \frac{\ln 2, \lambda} \approx 4.05 \text{days}$. The [accepted value for the half-life of Radium-224](https://en.wikipedia.org/wiki/Isotopes_of_radium) is 3.63 days, so we're a bit off from what's currently accepted.
+
