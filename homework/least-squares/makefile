@@ -8,15 +8,15 @@ out.fit.png : out.fit.data experiment.data makefile
 		set terminal png background "white" ; \
 		set out "$@" ; \
 		set xlabel "time (days)" ; \
-		set ylabel "ln(activity) (no dim.)" ; \
+		set ylabel "activity (no dim.)" ; \
 		set title "exponential decay fit" ; \
 		load "$<" ; \
-		f(t)=exp(log(a)-(lambda*t)) ; \
-		fplus(t)=exp(log(a+uncert_a)-((lambda+uncert_lambda)*t)) ; \
-		fminus(t)=exp(log(a-uncert_a)-((lambda-uncert_lambda)*t)) ; \
+		f(t)=exp(a-(lambda*t)) ; \
+		fplus(t)=exp(a+uncert_a-((lambda-uncert_lambda)*t)) ; \
+		fminus(t)=exp(a-uncert_a-((lambda+uncert_lambda)*t)) ; \
 		plot "$(word 2,$^)" skip 1 w yerrorbars \
 		title "experimental data" , \
-		f(x) title "least-squares fit f(t) = ln(a) - lambda*t" , \
+		f(x) title "least-squares fit f(t) = a*exp(-lambda*t)" , \
 		fplus(x) title "least-squares fit upper error bound" , \
 		fminus(x) title "least-squares fit lower error bound" ; \
 	' | tee log.gpi | gnuplot
