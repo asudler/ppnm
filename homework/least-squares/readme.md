@@ -12,5 +12,5 @@ Given a function of a single variable $f(y)$, the uncertainty on $f$, called $\d
 
 _Determining half-life time from fit_:
 
-The fit gives $\lambda=0.171 \text{days}^{-1}$, so the half-life time $T_{\frac{1,2}} = \frac{\ln 2}{\lambda} \approx 4.05 \text{days}$. The [accepted value for the half-life of Radium-224](https://en.wikipedia.org/wiki/Isotopes_of_radium) is 3.63 days, so we're a bit off from what's currently accepted.
+The fit gives $\lambda=0.171 \text{days}^{-1}$, so the half-life time $T_{\frac{1}{2}} = \frac{\ln 2}{\lambda} \approx 4.05 \text{days}$. The [accepted value for the half-life of Radium-224](https://en.wikipedia.org/wiki/Isotopes_of_radium) is 3.63 days, so we're a bit off from what's currently accepted.
 
