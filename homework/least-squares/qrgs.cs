@@ -24,10 +24,8 @@ public partial class qrgs {
      * uses the matrices Q and R from "decomp"
      * and solves Q.R.x = b for the given
      * RHS "b" */
-    public static vector solve(matrix A, vector b) {
-        matrix Q = decomp(A).Item1;
-        matrix R = decomp(A).Item2;
-        vector x = new vector(A.size2);
+    public static vector solve(matrix Q, matrix R, vector b) {
+        vector x = new vector(Q.size1);
         vector rhs = Q.transpose()*b;
         for(int i = rhs.size-1; i >= 0; i--) {
             double sum = 0;
@@ -37,6 +35,11 @@ public partial class qrgs {
             x[i] = (rhs[i] - sum)/R[i,i];
         }
         return x;
+    } // solve 
+
+    public static vector solve(matrix A, vector b) {
+        (matrix Q, matrix R) = decomp(A);
+        return solve(Q, R, b);
     } // solve
 
     /* determinant:
@@ -67,5 +70,19 @@ public partial class qrgs {
         }
         return inverse;
     } // inverse
+
+    /* pinverse:
+     * calculates the pseudo-inverse (Moore-Penrose inverse)
+     * of a tall matrix A using
+     * QRGS decomposition */
+    public static matrix pinverse(matrix A) {
+        (matrix Q, matrix R) = decomp(A);
+        matrix I = new matrix(Q.size1);
+        I.set_identity();
+        for(int i = 0; i < Q.size1; i++) {
+            I[i] = solve(Q, R, I[i]);
+        }
+        return I;
+    } // pinverse
 } // qrgs
 

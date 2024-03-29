@@ -1,6 +1,7 @@
 using System;
+using static qrgs;
 public static class ls {
-    public static vector lsfit
+    public static (vector, matrix) lsfit
     (Func<double,double>[] fs, vector x, vector y, vector dy) {
         int n = x.size, m = fs.Length;
         var A = new matrix(n, m);
@@ -11,6 +12,8 @@ public static class ls {
                 A[i,j] = fs[j](x[i])/dy[i];
             }
         }
-        return qrgs.solve(A, b);
+        matrix S = pinverse(A.transpose()*A);
+        return (qrgs.solve(A, b), S);
     }
 }
+
