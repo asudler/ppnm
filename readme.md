@@ -8,4 +8,4 @@ _Exercises_ were meant to teach us the basics of programming in C-sharp. _Homewo
 
 As of 2024-03-18, I have completed all of the exercises. My progress on the homeworks is indicated by a readme file in the homework subdirectory.
 
-Thanks B) ~AJS
+~AJS

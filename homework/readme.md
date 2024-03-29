@@ -3,7 +3,7 @@ completed assignments:
 | # | ASSIGNMENT                   | A | B | C | TOTAL |
 |---|------------------------------|---|---|---|-------|
 | 1 | linear equations (lineq)     | 6 | 3 | 1 |  10   |
-| 2 | eigenvalues (evd)            | 6 | 3 | :(|   9   |
-| 3 | least squares (least-squares)| :(| :(| :(|   0   |
+| 2 | eigenvalues (evd)            | 6 | 3 | 1 |  10   |
+| 3 | least squares (least-squares)| 6 | 3 | 1 |  10   |
 |...|...                           |...|...|...|...    |
-|tot| total points                 | 12| 9 | 1 |  19   |
+|tot| total points                 | 18| 9 | 3 |  30   |

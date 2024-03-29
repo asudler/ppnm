@@ -18,7 +18,7 @@ out/out.times.png : out/out.times.data makefile
 		A=5e-9 ; \
 		bg=0.02 ; \
 		fit f(x) "$<" via A, bg ; \
-		plot "$<" u 1:2 w lp title "real time" , \
+		plot "$<" u 1:2 w lp title "system time" , \
 		f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 	' | tee out/log.gpi | gnuplot
 
@@ -28,12 +28,12 @@ out/out.times.data : main.exe
 	$(RM) $@
 	for N in $(Ns) ; do \
 		sleep 0.1s ; \
-		time -ao out/log.$$N.tmp -f "$$N %e" \
+		time -ao out/.log.$$N.tmp -f "$$N %e" \
 		mono $< -partc -size:$$N 2> /dev/null & \
 	done ; wait
 	> $@
-	for N in $(Ns); do cat out/log.$$N.tmp >> $@ ; done
-	$(RM) out/*.tmp
+	for N in $(Ns); do cat out/.log.$$N.tmp >> $@ ; done
+	$(RM) out/.*.tmp
 
 out/out.wavefunctions.png : out/out.wavefunctions.data makefile
 	echo '\
