@@ -11,10 +11,10 @@ out.fit.png : out.fit.data experiment.data makefile
 		set ylabel "ln(activity) (no dim.)" ; \
 		set title "exponential decay fit" ; \
 		load "$<" ; \
-		f(t)=log(a)-(lambda*t) ; \
-		fplus(t)=log(a+uncert_a)-((lambda+uncert_lambda)*t) ; \
-		fminus(t)=log(a-uncert_a)-((lambda-uncert_lambda)*t) ; \
-		plot "$(word 2,$^)" skip 1 u 1:(log($$2)):($$3/$$2) w yerrorbars \
+		f(t)=exp(log(a)-(lambda*t)) ; \
+		fplus(t)=exp(log(a+uncert_a)-((lambda+uncert_lambda)*t)) ; \
+		fminus(t)=exp(log(a-uncert_a)-((lambda-uncert_lambda)*t)) ; \
+		plot "$(word 2,$^)" skip 1 w yerrorbars \
 		title "experimental data" , \
 		f(x) title "least-squares fit f(t) = ln(a) - lambda*t" , \
 		fplus(x) title "least-squares fit upper error bound" , \
