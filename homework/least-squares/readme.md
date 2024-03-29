@@ -8,4 +8,4 @@ vector.cs: from prior homework "evd" (originally provided by Dmitri).
 
 _The uncertainty of the logarithm of a dataset:_
 
-Given a function of a single variable $f(y)$, the uncertainty on $f$, called $\del f$, is related to the uncertainty on $y$, called $\del y$, through the formula $$\del f = \sqrt{\left(\frac{df,dy}\right)^2 \del y^2}.$$ 
+Given a function of a single variable $f(y)$, the uncertainty on $f$, called $\partial f$, is related to the uncertainty on $y$, called $\partial y$, through the formula $$\del f = \sqrt{\left(\frac{df,dy}\right)^2 \del y^2}.$$ 
