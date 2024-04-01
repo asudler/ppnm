@@ -34,7 +34,7 @@ public static class main {
         for(int i = 0; i <= nintervals; i++) {
             double z = (x[x.Length-1]/nintervals)*i;
             Write($"{z}\t {linear_spline(x, y, z)}\t");
-            Write($"{linear_integrate(x, y, z)}\n");
+            Write($"{linterpInteg(x, y, z)}\n");
         }
     }
 

@@ -17,5 +17,5 @@ main.exe : main.cs spline.dll ; $(MKEXE)
 spline.dll : spline.cs ; $(MKLIB)
 
 clean :
-	$(RM) *.exe *.dll [Oo]ut* log* *.svg
+	$(RM) in* *.exe *.dll [Oo]ut* log* *.svg
 

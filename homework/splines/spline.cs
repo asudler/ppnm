@@ -1,4 +1,5 @@
 using System;
+using static System.Math;
 
 public static class spline {
     /* binsearch:
@@ -35,18 +36,33 @@ public static class spline {
     public static double linear_integrate(double[] x, double[] y, double z) {
         int i = binsearch(x, z); 
         double integral = 0;
-        for(int j = 0; j < i - 1; j++) {
-            double dx = x[j+1] - x[j];
+        double dx, dy;
+        for(int j = 0; j < i; j++) {
+            dx = x[j+1] - x[j];
+            dy = y[j+1] - y[j];
             if(!(dx > 0)) {
                 throw new Exception("linear_integrate: bad x (is x sorted?)");
             }
-            double dy = y[j+1] - y[j];
             integral += dx*y[j] + dx*dy/2; // trapezoidal rule
         }
         
         // extrapolate to z by analytical integration
-        integral += (z-x[i])+(linear_spline(x, y, z) + y[i])/2;
+        dx = x[i+1] - x[i];
+        dy = y[i+1] - y[i];
+        integral += y[i]*(z - x[i]) + dy/dx*Pow(z - x[i], 2)/2;
         return integral;
     } // linear_integrate
+
+    public static double linterpInteg(double[]x,double[]y,double z){
+		double Int=0;
+		int i=binsearch(x,z);
+		for(int k=0;k<i;k++){
+			Int+=(x[k+1]-x[k])*(y[k+1]+y[k])/2;
+		}
+		Int+=(z-x[i])*(linear_spline(x,y,z)+y[i])/2;
+		
+		return Int;
+	}
+
 } // spline
 
