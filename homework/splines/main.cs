@@ -50,7 +50,7 @@ public static class main {
         }
         for(int i = 0; i <= nminusone; i++) {
             double x = (i/xmax)*nminusone;
-            double y = Exp(-x)*Sin(x);
+            double y = Exp(-0.1*x)*Sin(x);
             Write($"{x}\t {y}\n");
         }
     }
