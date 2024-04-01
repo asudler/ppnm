@@ -4,7 +4,7 @@ using static System.Math;
 public static class spline {
     /* binsearch:
      * binary search algorithm; i.e.,
-     * finding target value of a sorted array
+     * finding target interval of a sorted array
      * by bisection */
     public static int binsearch(double[] x, double z) {
         if(z < x[0] || z > x[x.Length-1]) {
@@ -15,7 +15,7 @@ public static class spline {
             int mid = (i+j)/2;
             if(z > x[mid]) i = mid; else j = mid;
         }
-        return i;
+        return i; // lower or "left" index
     }
 
     /* linear_spline:
@@ -53,16 +53,16 @@ public static class spline {
         return integral;
     } // linear_integrate
 
-    public static double linterpInteg(double[]x,double[]y,double z){
-		double Int=0;
-		int i=binsearch(x,z);
-		for(int k=0;k<i;k++){
-			Int+=(x[k+1]-x[k])*(y[k+1]+y[k])/2;
-		}
-		Int+=(z-x[i])*(linear_spline(x,y,z)+y[i])/2;
-		
-		return Int;
-	}
+    /* quadratic_spline:
+     * connecting the dots...
+     * ...but now the ruler can bend! */
+    public class quadratic_spline {
+        double[] x, y, b, c;
+        public qspline(double[] xs, double ys[]) {
+            x = xs.copy();
+        }
+
+    }
 
 } // spline
 
