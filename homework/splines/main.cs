@@ -5,8 +5,7 @@ using static System.Math;
 using static spline;
 
 public static class main {
-    public static void taska(string[] args) {
-        // get input parameters
+    public static (int, double[], double[]) getinput(string[] args) {
         string infile = null;
         int nintervals = 0;
         foreach(var arg in args) {
@@ -29,14 +28,31 @@ public static class main {
             x[i] = double.Parse(fields[0]);
             y[i] = double.Parse(fields[1]);
         }
+        return (nintervals, x, y);
+    } // getinput
+    
+    public static void taska(string[] args) {
+        (int nintervals, double[] x, double[] y) = getinput(args);
 
-        // run linear spline and linear integration
+        // run linear spline and linear integration over dataset
         for(int i = 0; i <= nintervals; i++) {
             double z = (x[x.Length-1]/nintervals)*i;
             Write($"{z}\t {linear_spline(x, y, z)}\t");
-            Write($"{linterpInteg(x, y, z)}\n");
+            Write($"{linear_integrate(x, y, z)}\n");
         }
-    }
+    } // taska
+
+    public static void taskb(string[] args) {
+        (int nintervals, double[] x, double[] y) = getinput(args);
+
+        // run quadratic spline over dataset
+        quadratic_spline spline = new quadratic_spline(x, y);
+        for(int i = 0; i <= nintervals; i++) {
+            double z = (x[x.Length-1]/nintervals)*i;
+            Write($"{z}\t {spline.evaluate(z)}\t");
+            Write($"{spline.differentiate(z)}\t {spline.integrate(z)}\n");
+        }
+    } // taskb
 
     public static void makedata(string[] args) {
         int nminusone = 0; double xmax = 0;
@@ -53,13 +69,14 @@ public static class main {
             double y = Exp(-0.1*x)*Sin(x);
             Write($"{x}\t {y}\n");
         }
-    }
+    } // makedata
 
     public static int Main(string[] args) {
         foreach(string arg in args) {
             if(arg == "-makedata") makedata(args);
             if(arg == "-parta") taska(args);
+            if(arg == "-partb") taskb(args);
         }
         return 0;
-    }
-}
+    } // Main
+} // main
