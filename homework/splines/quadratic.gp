@@ -2,7 +2,6 @@ set terminal svg background "white"
 set out outfile
 set xlabel "x"
 set ylabel "y"
-set key outside right top
 
 df(x)=exp(-x/10)*(cos(x)-0.1*sin(x))
 f(x)=exp(-x/10)*sin(x)
