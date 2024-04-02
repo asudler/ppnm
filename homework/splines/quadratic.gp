@@ -3,7 +3,8 @@ set out outfile
 set xlabel "x"
 set ylabel "y"
 set size ratio 0.5
-set key outside right
+set key
+set autoscale fix
 
 df(x)=exp(-x/10)*(cos(x)-0.1*sin(x))
 f(x)=exp(-x/10)*sin(x)
