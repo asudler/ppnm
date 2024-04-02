@@ -1,4 +1,5 @@
 using System;
+using static System.Console; // for debug, delete later
 using static System.Math;
 
 public static class spline {
@@ -95,8 +96,7 @@ public static class spline {
 
         public double integrate(double z) {
             int i = binsearch(x, z);
-            double integral = 0;
-            double dx;
+            double integral = 0; double dx;
             for(int j = 0; j < i; j++) {
                 dx = x[j+1] - x[j];
                 if(!(dx > 0)) {
@@ -106,10 +106,88 @@ public static class spline {
                 integral += y[j]*dx + b[j]*Pow(dx, 2)/2
                     + c[j]*Pow(dx, 3)/3;
             }
-            integral += y[i]*(z-x[i]) + 1.0*b[i]*Pow(z - x[i], 2)/2
+            integral += y[i]*(z - x[i]) + 1.0*b[i]*Pow(z - x[i], 2)/2
                 + c[i]*Pow(z - x[i], 3)/3;
             return integral;
         } // integrate
     } // quadratic_spline
+
+    /* cubic spline:
+     * connecting the dots...
+     * ... but now the ruler can bend in two directions!
+     * see Fedorov p. 13 */
+    public class cubic_spline {
+        double[] x, y, b, c, d;
+        public cubic_spline(double[] xs, double[] ys) {
+            if(xs.Length != ys.Length) {
+                throw new Exception("cubic_spline: invalid dimensions");
+            }
+            x = xs; y = ys;
+            int n = x.Length;
+            b = new double[n]; c = new double[n-1]; d = new double[n-1]; 
+            double[] h = new double[n-1], p = new double[n-1],
+            D = new double[n], Q = new double[n-1], B = new double[n];
+            for(int i = 0; i < n - 1; i++) {
+                h[i] = x[i+1] - x[i];
+                if(h[i] < 0) throw new Exception("unsorted x");
+                p[i] = (y[i+1] - y[i])/h[i];
+            }
+
+            // building the tridiagonal system
+            D[0] = 2; Q[0] = 1; B[0] = 3*p[0];
+            for(int i = 0; i < n - 2; i++) {
+                D[i+1] = 2*h[i]/h[i+1] + 2;
+                Q[i+1] = h[i]/h[i+1];
+                B[i+1] = 3*(p[i] + p[i+1]*h[i]/h[i+1]);
+            }
+            D[n-1] = 2; B[n-1] = 3*p[n-2];
+
+            // gaussian elimination
+            for(int i = 1; i < n; i++) {
+                D[i] -= Q[i-1]/D[i-1];
+                B[i] -= B[i-1]/D[i-1];
+            }
+
+            // back substitution
+            b[n-1] = B[n-1]/D[n-1];
+            for(int i = n - 2; i >= 0; i--) {
+                b[i] = (B[i] - Q[i]*b[i+1])/D[i];
+            }
+            for(int i = 0; i < n - 1; i++) {
+                c[i] = (-2*b[i] - b[i+1] + 3*p[i])/h[i];
+                d[i] = (b[i] + b[i+1] - 2*p[i])/(h[i]*h[i]);
+            }
+        } // constructor
+
+        public double evaluate(double z) {
+            int i = binsearch(x, z);
+            return y[i] + b[i]*(z - x[i])
+                + c[i]*Pow(z - x[i], 2)
+                + d[i]*Pow(z - x[i], 3);
+        } // evaluate
+
+        public double differentiate(double z) {
+            int i = binsearch(x, z);
+            return b[i] + 2*c[i]*(z - x[i])
+                + 3*d[i]*Pow(z - x[i], 2);
+        } // differentiate
+
+        public double integrate(double z) {
+            int i = binsearch(x, z);
+            double integral = 0; double dx;
+            for(int j = 0; j < i; j++) {
+                dx = x[j+1] - x[j];
+                if(!(dx > 0)) {
+                    throw new
+                    Exception("linear_integrate: bad x (is x sorted?)");
+                }
+                integral += y[j]*dx + b[j]*Pow(dx, 2)/2
+                    + c[j]*Pow(dx, 3)/3 + d[j]*Pow(dx, 4)/4;
+            }
+            integral += y[i]*(z - x[i]) + 1.0*b[i]*Pow(z - x[i], 2)/2
+                + c[i]*Pow(z - x[i], 3)/3 + d[i]*Pow(z - x[i], 4)/4;
+            return integral;
+        } // integrate
+    } // cubic_spline
 } // spline
 

@@ -3,14 +3,21 @@ LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 
-out.quadratic.png : quadratic.gp out.quadratic.data in.function.data
+out.cubic.png : in.cubic.gp out.cubic.data in.function.data
+	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
+    data='$(word 3,$^)'" $<
+
+out.cubic.data : main.exe in.function.data
+	mono $< -partc -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
+
+out.quadratic.png : in.quadratic.gp out.quadratic.data in.function.data
 	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
     data='$(word 3,$^)'" $<
 
 out.quadratic.data : main.exe in.function.data
 	mono $< -partb -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
 
-out.linear.png : linear.gp out.linear.data in.function.data
+out.linear.png : in.linear.gp out.linear.data in.function.data
 	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
 	data='$(word 3,$^)'" $<
 
@@ -24,5 +31,5 @@ main.exe : main.cs spline.dll ; $(MKEXE)
 spline.dll : spline.cs ; $(MKLIB)
 
 clean :
-	$(RM) in* *.exe *.dll [Oo]ut* log* *.svg
+	$(RM) *.data *.exe *.dll [Oo]ut* log* *.svg
 

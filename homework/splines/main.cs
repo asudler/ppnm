@@ -54,6 +54,18 @@ public static class main {
         }
     } // taskb
 
+    public static void taskc(string[] args) {
+        (int nintervals, double[] x, double[] y) = getinput(args);
+
+        // run cubic spline over dataset
+        cubic_spline spline = new cubic_spline(x, y);
+        for(int i = 0; i <= nintervals; i++) {
+            double z = (x[x.Length-1]/nintervals)*i;
+            Write($"{z}\t {spline.evaluate(z)}\t");
+            Write($"{spline.differentiate(z)}\t {spline.integrate(z)}\n");
+        }
+    } // taskc
+
     public static void makedata(string[] args) {
         int nminusone = 0; double xmax = 0;
         foreach(var arg in args) {
@@ -76,6 +88,7 @@ public static class main {
             if(arg == "-makedata") makedata(args);
             if(arg == "-parta") taska(args);
             if(arg == "-partb") taskb(args);
+            if(arg == "-partc") taskc(args);
         }
         return 0;
     } // Main
