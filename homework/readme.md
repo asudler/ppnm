@@ -5,5 +5,6 @@ completed assignments:
 | 1 | linear equations (lineq)     | 6 | 3 | 1 |  10   |
 | 2 | eigenvalues (evd)            | 6 | 3 | 1 |  10   |
 | 3 | least squares (least-squares)| 6 | 3 | 1 |  10   |
+| 4 | splines                      | - | - | - |  -    |
 |...|...                           |...|...|...|...    |
 |tot| total points                 | 18| 9 | 3 |  30   |
