@@ -12,7 +12,7 @@ plot f(x) title "function", \
 df(x) title "derivative (analytical)", \
 F(x) title "antiderivative (analytical)", \
 data w p pointsize 2 title "raw data", \
-interpolation u 1:2 w p title "spline", \
+interpolation u 1:2 w p title "cubic spline", \
 interpolation u 1:3 w p title "spline differentiation", \
 interpolation u 1:4 w p title "spline integration"
 
