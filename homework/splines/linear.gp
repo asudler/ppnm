@@ -1,4 +1,4 @@
-set terminal svg background "white"
+set terminal png background "white"
 set out outfile
 set xlabel "x"
 set ylabel "y"

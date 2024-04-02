@@ -10,7 +10,7 @@ out.quadratic.png : quadratic.gp out.quadratic.data in.function.data
 out.quadratic.data : main.exe in.function.data
 	mono $< -partb -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
 
-out.linear.svg : linear.gp out.linear.data in.function.data
+out.linear.png : linear.gp out.linear.data in.function.data
 	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
 	data='$(word 3,$^)'" $<
 
