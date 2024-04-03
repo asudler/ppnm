@@ -1,5 +1,4 @@
 using System;
-using static System.Console; // for debug, delete later
 using static System.Math;
 
 public static class spline {
