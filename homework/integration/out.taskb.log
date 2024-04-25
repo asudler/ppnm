@@ -1,4 +1,11 @@
-quad (17140 calls): ∫[0,1] dx 1/√(x) = 1.99999738796403
-clenshaw_curtis (52 calls): ∫[0,1] dx 1/√(x) = 1.9999998903107
-quad (29972 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999834899021
-clenshaw_curtis (272 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999813339603
+### C# Implementation ###
+abserr = 0.0001, relerr = 0.0001
+quad (17140 calls): ∫[0,1] dx 1/√(x) = 1.99999738796403, error estimate = 7.70897793161969E-05
+clenshaw_curtis (52 calls): ∫[0,1] dx 1/√(x) = 1.9999998903107, error estimate = 6.90012046991409E-05
+quad (29972 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999834899021, error estimate = 8.09348853471496E-05
+clenshaw_curtis (272 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999813339603, error estimate = 8.72530707646822E-05
+
+### Python Implementation ###
+abserr = 0.0001, relerr = 0.0001
+scipy.integrate.quad (231 calls): ∫[0,1] dx 1/√(x) = 1.9999999999999984, error estimate = 5.773159728050814e-15
+scipy.integrate.quad (315 calls): ∫[0,1] dx ln(x)/√(x) = -4.000000000000085, error estimate = 1.354472090042691e-13

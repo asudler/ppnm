@@ -1,0 +1,11 @@
+### C# Implementation ###
+abserr = 0.0001, relerr = 0.0001
+quad (4 calls): ∫[1,inf] dx 1/x/x = 1, error estimate = 1.11022302462516E-16
+quad (68 calls): ∫[-inf,0] dx 2/(1+x*x) = 3.14159908281535, error estimate = 8.97002040801247E-05
+quad (236 calls): ∫[-inf,inf] dx exp(-x*x) = 1.77269051667853, error estimate = 5.87639958161902E-05
+
+### Python Implementation ###
+abserr = 0.0001, relerr = 0.0001
+scipy.integrate.quad (15 calls): ∫[1,inf] dx 1/x/x = 1.0, error estimate = 1.1102230246251565e-14
+scipy.integrate.quad (45 calls): ∫[-inf,0] dx 1/(1+x*x) = 3.141592653589793, error estimate = 5.155583041103855e-10
+scipy.integrate.quad (150 calls): ∫[-inf,inf] dx exp(-x*x) = 1.7724538509067376, error estimate = 4.316364671314715e-06

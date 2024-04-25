@@ -3,8 +3,11 @@ LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 
-out.taskb.dat : main.exe
-	mono $< -taskb 2> out.taskb.log
+out.taskc.dat : main.exe
+	mono $< -taskc 2> out.taskc.log ; python3 taskc.py >> out.taskc.log
+
+out.taskb.dat : main.exe taskb.py
+	mono $< -taskb 2> out.taskb.log ; python3 taskb.py >> out.taskb.log
 
 out.erf.png : erf.gp erf_wikipedia.dat out.taska.dat
 	gnuplot -e "outfile='$@' ; mydata='$(word 3,$^)' ; \
