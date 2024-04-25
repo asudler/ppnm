@@ -15,5 +15,5 @@ main.exe : main.cs ode.dll ; $(MKEXE)
 ode.dll : ode.cs rk.cs ; $(MKLIB)
 
 clean :
-	$(RM) *.data *.exe *.dll [Oo]ut* log* *.svg
+	$(RM) *.data *.exe *.dll [Oo]ut* *.log *.svg
 

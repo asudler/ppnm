@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using static System.Math;
 using static rk;
-using static spline;
+// using static spline;
 public static class ode {
     /* norm:
      * calculate the vector norm of a list of doubles */
@@ -25,8 +25,8 @@ public static class ode {
         (double, double) interval, // x start point to x end point
         double[] yi, // y value at start point
         double h=0.125, // initial dx
-        double acc=1E-1, // absolute accuracy goal
-        double eps=1E-1 // relative accuracy goal
+        double acc=1E-6, // absolute accuracy goal
+        double eps=1E-3 // relative accuracy goal
     ) {
         var (a, b) = interval; double x = a; double[] y = yi;
         var xlist = new List<double>(); xlist.Add(x);
@@ -35,8 +35,10 @@ public static class ode {
             if(x >= b) return (xlist, ylist); // job done, breaks loop
             if(x + h > b) h = b - x; // last step should end at b
             var (yh, yerr) = rkstep45(F, x, y, h);
-            double tol = (acc + eps*norm(yh))*Sqrt(h/(b - a));
+//            double tol = (acc + eps*norm(yh))*Sqrt(h/(b - a));
+            double tol = acc + eps*norm(yh); // scipy
             double err = norm(yerr);
+            System.Console.Error.Write($"{err}\t {tol}\t {h}\n");
             if(err <= tol) { // accept step
                 x += h; y = yh;
                 xlist.Add(x);
