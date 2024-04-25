@@ -86,9 +86,9 @@ public static class main {
     public static int Main(string[] args) {
         foreach(string arg in args) {
             if(arg == "-makedata") makedata(args);
-            if(arg == "-parta") taska(args);
-            if(arg == "-partb") taskb(args);
-            if(arg == "-partc") taskc(args);
+            if(arg == "-taska") taska(args);
+            if(arg == "-taskb") taskb(args);
+            if(arg == "-taskc") taskc(args);
         }
         return 0;
     } // Main

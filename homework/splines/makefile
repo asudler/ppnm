@@ -8,21 +8,21 @@ out.cubic.png : in.cubic.gp out.cubic.data in.function.data
     data='$(word 3,$^)'" $<
 
 out.cubic.data : main.exe in.function.data
-	mono $< -partc -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
+	mono $< -taskc -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
 
 out.quadratic.png : in.quadratic.gp out.quadratic.data in.function.data
 	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
     data='$(word 3,$^)'" $<
 
 out.quadratic.data : main.exe in.function.data
-	mono $< -partb -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
+	mono $< -taskb -nintervals:100 -input:$(word 2,$^) > $@ 2> log.err
 
 out.linear.png : in.linear.gp out.linear.data in.function.data
 	gnuplot -e "outfile='$@' ; interpolation='$(word 2,$^)' ; \
 	data='$(word 3,$^)'" $<
 
 out.linear.data : main.exe in.function.data
-	mono $< -parta -nintervals:100 -input:$(word 2,$^) > $@
+	mono $< -taska -nintervals:100 -input:$(word 2,$^) > $@
 
 in.function.data : main.exe
 	mono $< -makedata -nminusone:10 -xmax:10 > $@
