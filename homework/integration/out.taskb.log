@@ -1,0 +1,4 @@
+quad (17140 calls): ∫[0,1] dx 1/√(x) = 1.99999738796403
+clenshaw_curtis (52 calls): ∫[0,1] dx 1/√(x) = 1.9999998903107
+quad (29972 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999834899021
+clenshaw_curtis (272 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999813339603

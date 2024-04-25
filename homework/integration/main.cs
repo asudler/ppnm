@@ -83,9 +83,49 @@ public static class main {
         }
     } // taska
 
+    public static void taskb(string[] args) {
+        int ncalls = 0;
+        Func<double, double> f1 = x => {
+            ncalls++; 
+            return 1/Math.Sqrt(x);
+        };
+        Func<double, double> f2 = x => {
+            ncalls++; 
+            return Math.Log(x)/Math.Sqrt(x);
+        };
+
+        // similar tests as in taska,
+        // i.e. check known integrals and errors
+        // but we will use lower errors than taska
+        double abserr = 1E-4, relerr = 1E-4;
+        double sol = quad(f1, 0, 1, delta: abserr, eps: relerr);
+        if(Math.Abs(sol - 2) < abserr) {
+            Error.Write($"quad ({ncalls} calls): ∫[0,1] dx 1/√(x) = {sol}\n");
+        }
+        ncalls = 0;
+        sol = clenshaw_curtis(f1, 0, 1, delta: abserr, eps: relerr);
+        if(Math.Abs(sol - 2) < abserr) {
+            Error.Write($"clenshaw_curtis ({ncalls} calls): ");
+            Error.Write($"∫[0,1] dx 1/√(x) = {sol}\n");
+        }
+        ncalls = 0;
+        sol = quad(f2, 0, 1, delta: abserr, eps: relerr);
+        if(Math.Abs(sol + 4) < abserr) {
+            Error.Write($"quad ({ncalls} calls): ");
+            Error.Write($"∫[0,1] dx ln(x)/√(x) = {sol}\n");
+        }
+        ncalls = 0;
+        sol = clenshaw_curtis(f2, 0, 1, delta: abserr, eps: relerr);
+        if(Math.Abs(sol + 4) < abserr) {
+            Error.Write($"clenshaw_curtis ({ncalls} calls): ");
+            Error.Write($"∫[0,1] dx ln(x)/√(x) = {sol}\n");
+        }
+    } // taskb
+
     public static int Main(string[] args) {
         foreach(string arg in args) {
-            if(arg == "-parta") taska(args);
+            if(arg == "-taska") taska(args);
+            if(arg == "-taskb") taskb(args);
         }
         return 0;
     } // Main

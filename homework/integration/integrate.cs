@@ -22,5 +22,18 @@ public static class integrate {
         else return quad(f,a,(a+b)/2,delta/Math.Sqrt(2),eps,f1,f2)
             + quad(f,(a+b)/2,b,delta/Math.Sqrt(2),eps,f3,f4);
     } // quad
+
+    /* clenshaw_curtis:
+     * adaptive integration using the Clenshaw-Curtis variable
+     * transformation, see Fedorov p. 72-73 */
+    public static double clenshaw_curtis
+    (Func<double, double> f, double a, double b,
+    double delta=0.001, double eps=0.001,
+    double f2=Double.NaN, double f3=Double.NaN) {
+        Func<double, double> g = theta
+            => f((a + b)/2 + (b - a)/2*Math.Cos(theta))
+            * Math.Sin(theta) * (b - a)/2;
+        return quad(g, 0, Math.PI, delta, eps, f2, f3);
+    } // clenshaw_curtis
 } // integrate
 
