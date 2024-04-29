@@ -1,0 +1,2 @@
+montecarlo: plainmc tests
+unit circle area (n = 500): sol = 3.216, err = 0.0710118863289801 (real err = 0.0744073464102071)
