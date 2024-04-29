@@ -16,6 +16,15 @@ public static class main {
             else return 0;
         }; // unit circle function
 
+        Func<double[], double> f2 = x => {
+            if(Math.Sqrt(x[0]*x[0] + x[1]*x[1]) <= 1) 
+                return Math.Exp(-(x[0]*x[0] + x[1]*x[1])/2);
+            else return 0;
+        }; // 2D Gaussian function
+
+        Func<double[], double> f3 = x => {
+            return 1;
+        }; // cube function (interesting enough!)
 
         // testing our monte carlo integration routine
         Error.Write($"montecarlo: plainmc tests (n = {n})\n");
@@ -24,6 +33,15 @@ public static class main {
         (double sol, double err) = plainmc(f1, ll, ur, n);
         Error.Write($"sol = {sol}, err = {err} ");
         Error.Write($"(real err = {Math.Abs(Math.PI - sol)})\n");
+        Error.Write($"2D Gaussian in unit circle: ");
+        (sol, err) = plainmc(f2, ll, ur, n);
+        Error.Write($"sol = {sol}, err = {err} ");
+        double help = 2*(1 - 1/Math.Sqrt(Math.E))*Math.PI;
+        Error.Write($"(real err = {Math.Abs(sol - help)})\n");
+        Error.Write($"2x2 cube (like 4 minecraft blocks): ");
+        (sol, err) = plainmc(f3, ll, ur, n);
+        Error.Write($"sol = {sol}, err = {err} ");
+        Error.Write($"(real err = {Math.Abs(sol - 4)})\n");
     } // taska
     
     public static int Main(string[] args) {

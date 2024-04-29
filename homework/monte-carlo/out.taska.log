@@ -1,2 +1,4 @@
-montecarlo: plainmc tests
-unit circle area (n = 500): sol = 3.216, err = 0.0710118863289801 (real err = 0.0744073464102071)
+montecarlo: plainmc tests (n = 500)
+unit circle area: sol = 3.064, err = 0.0757351173498794 (real err = 0.0775926535897931)
+2D Gaussian in unit circle: sol = 2.4135809008081, err = 0.0622784230522939 (real err = 0.0586598769111255)
+2x2 cube (like 4 minecraft blocks): sol = 4, err = 0 (real err = 0)
