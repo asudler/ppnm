@@ -113,7 +113,7 @@ public static class spline {
 
     /* cubic spline:
      * connecting the dots...
-     * ... but now the ruler can bend in two directions!
+     * ...but now the ruler can bend in two directions!
      * see Fedorov p. 13 */
     public class cubic_spline {
         double[] x, y, b, c, d;
