@@ -30,7 +30,7 @@ out.planet2.dat : main.exe
     > $@ 2> err.log
 
 out.planet1.dat : main.exe
-	mono $< -planet -greps:0 -yi:1 -dyi:1 -ti:0 -tf:10 -dt:0.1 \
+	mono $< -planet -greps:0 -yi:1 -dyi:0 -ti:0 -tf:10 -dt:0.1 \
 	> $@ 2> err.log
 
 out.lotkavolterra.png : in.lotkavolterra.gpi out.lotkavolterra.dat
