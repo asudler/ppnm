@@ -38,9 +38,9 @@ public static class ode {
             if(x >= b) return (xlist, ylist); // job done, breaks loop
             if(x + h > b) h = b - x; // last step should end at b
             var (yh, yerr) = rkstep45(F, x, y, h);
-//            double tol = (acc + eps*norm(yh))*Sqrt(h/(b - a));
+            double tol = (acc + eps*norm(yh))*Sqrt(h/(b - a));
             // (scipy tol, less rigid, see below)
-            double tol = acc + eps*norm(yh);
+            // double tol = acc + eps*norm(yh);
             double err = norm(yerr);
             Error.Write($"ode: err={err} tol={tol} h={h}\n");
             if(err <= tol) { // accept step
