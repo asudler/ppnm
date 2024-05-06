@@ -3,6 +3,7 @@ set output outfile
 set xlabel "x"
 set ylabel "y"
 set zlabel "z"
+set grid
 set key outside right
 
 stats data nooutput

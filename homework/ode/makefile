@@ -7,8 +7,9 @@ out.threebody_fun.gif : in.threebody_fun.gpi out.threebody_fun.dat
 	gnuplot -e "outfile='$@' ; data='$(word 2,$^)'" $<
 
 out.threebody_fun.dat : main.exe makefile
-	mono $< -threebody -xi2:5 -dyi2:2 -xi1:5 -zi1:-1.0001 -dyi1:-2.5 \
-	-m1:10 -m2:2 -ti:0 -tf:100 -dt:0.025 \
+	mono $< -threebody -xi2:5 -dyi2:2.1 dzi2:-0.12 \
+	-xi1:5 -zi1:-1.0001 -dyi1:-2.5 \
+	-m1:10 -m2:2 -ti:0 -tf:221 -dt:0.025 \
 	> $@ 2> err.log
 
 out.threebody_interp.gif : in.threebody_interp.gpi out.threebody_interp.dat
