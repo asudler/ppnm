@@ -7,7 +7,7 @@ set key outside right
 stats data nooutput
 N = STATS_records
 do for [i=0:N-1] {
-    mytime=system("awk 'NR==i {print $1}' out.threebody_interp.dat")
+    mytime=system("awk 'NR==".i." {print $1}' out.threebody_interp.dat")
     set title 'Three Body Figure 8, time: '.mytime
     set xr [-1.5:1.5]
     set yr [-0.4:0.4]
