@@ -3,11 +3,13 @@ set output outfile
 set xlabel "x"
 set ylabel "y"
 set key outside right
-set title "Three Body Figure-8"
 
 stats data nooutput
 N = STATS_records
 do for [i=0:N-1] {
+    set title 'Three Body Figure 8, time: '.i
+    set xr [-1.5:1.5]
+    set yr [-0.4:0.4]
     plot data u 11:12 every ::::i w l title "body 1", \
     '' u 11:12 every ::i::i w p pt 7 lc rgb "red" notitle, \
     '' u 14:15 every ::::i w l title "body 2", \

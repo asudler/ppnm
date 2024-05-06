@@ -10,7 +10,7 @@ out.threebody_interp.dat : main.exe makefile
 	mono $< -threebody -dxi1:0.4662036850 -dyi1:0.4323657300 \
 	-dxi2:-0.93240737 -dyi2:-0.86473146 -dxi3:0.4662036850 \
 	-dyi3:0.4323657300 -xi1:-0.97000436 -yi1:0.24308753 \
-	-xi3:0.97000436 -yi3:-0.24308753 -ti:0 -tf:7 -dt:0.25 \
+	-xi3:0.97000436 -yi3:-0.24308753 -ti:0 -tf:6.28 -dt:1E-2 \
 	> $@ 2> err.log
 
 out.threebody_raw.dat : main.exe makefile
