@@ -3,11 +3,14 @@ LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 
+out.threebody_interp.gif : in.threebody_interp.gpi out.threebody_interp.dat
+	gnuplot -e "outfile='$@' ; data='$(word 2,$^)'" $<
+
 out.threebody_interp.dat : main.exe makefile
 	mono $< -threebody -dxi1:0.4662036850 -dyi1:0.4323657300 \
 	-dxi2:-0.93240737 -dyi2:-0.86473146 -dxi3:0.4662036850 \
 	-dyi3:0.4323657300 -xi1:-0.97000436 -yi1:0.24308753 \
-	-xi3:0.97000436 -yi3:-0.24308753 -ti:0 -tf:7 -dt:1E-3 \
+	-xi3:0.97000436 -yi3:-0.24308753 -ti:0 -tf:7 -dt:0.25 \
 	> $@ 2> err.log
 
 out.threebody_raw.dat : main.exe makefile
