@@ -63,7 +63,8 @@ public static class integrate {
         Func<double, double> g = theta
             => f((a + b)/2 + (b - a)/2*Math.Cos(theta))
             * Math.Sin(theta) * (b - a)/2;
-        return quad(g, 0, Math.PI, delta, eps, f2, f3);
+        //return quad(g, 0, Math.PI, delta, eps, f2, f3);
+return quad(t=>f(a+(b-a)*(3*t*t-2*t*t*t))*(b-a)*6*(t-t*t) ,0,1,delta,eps);
     } // clenshaw_curtis
 } // integrate
 

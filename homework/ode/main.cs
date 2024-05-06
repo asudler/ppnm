@@ -4,6 +4,24 @@ using static System.Console;
 using static System.Math;
 using static ode;
 public static class main {
+    public static void polynomial(string[] args) {
+        Func<double, double[], double[]> f0 = (x, y)
+            => new double[] {0};
+        Func<double, double[], double[]> f1 = (x, y)
+            => new double[] {1};
+        Func<double, double[], double[]> f2 = (x, y)
+            => new double[] {2*x};
+        Func<double, double[], double[]> f3 = (x, y)
+            => new double[] {3*x*x};
+        Func<double, double[], double[]> f4 = (x, y)
+            => new double[] {4*x*x*x};
+        double[] y0_arr = new double[] {0};
+        (List<double> xs, List<double[]> ys) = ode.driver(f4, (0, 5), y0_arr);
+        for(int i = 0; i < xs.Count; i++) {
+            Write($"{xs[i]}\t{ys[i][0]}\t\n");
+        }
+    } // polynomial
+
     public static void oscillator(string[] args) {
         double b = 0, c = 0, yi = 0, dyi = 0, ti = 0, tf = 0;
         foreach(string arg in args) {
@@ -48,6 +66,7 @@ public static class main {
     
     public static int Main(string[] args) {
         foreach(string arg in args) {
+            if(arg == "-test") polynomial(args);
             if(arg == "-oscillator") oscillator(args);
             if(arg == "-lotkavolterra") lotkavolterra(args);
         }
