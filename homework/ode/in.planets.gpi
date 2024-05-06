@@ -1,0 +1,13 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "t"
+set key outside right
+
+set title "Planet around Star"
+plot data1 skip 1 u (1/$2)*cos($1):(1/$2)*sin($1) w lp \
+title "newtonian circular motion", \
+data2 skip 1 u (1/$2)*cos($1):(1/$2)*sin($1) w lp \
+title "newtonian elliptical motion", \
+data3 skip 1 u (1/$2)*cos($1):(1/$2)*sin($1) w lp \
+title "relativistic precession"
+
