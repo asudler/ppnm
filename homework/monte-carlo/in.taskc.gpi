@@ -1,0 +1,12 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "x"
+set ylabel "y"
+set grid
+set key outside right
+set title "stratmc sampled points, unit circle function"
+set xr [-1.2:1.2]
+set yr [-1.2:1.2]
+
+plot data u 1:2 w p pt 7 ps 0.5
+

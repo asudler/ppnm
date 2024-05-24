@@ -1,4 +1,4 @@
-montecarlo: quasimc tests (n = 500)
-unit circle area: solh = 3.152, soll = 3.12, err = 0.032 (real errh = 0.010407346410207, real errl = 0.021592653589793)
-2D Gaussian in unit circle: solh = 2.47705127594047, soll = 2.45979972969036, err = 0.0172515462501104 (real errh = 0.00481049822124113, real errl = 0.0124410480288693)
+montecarlo: quasimc tests (n = 25000)
+unit circle area: solh = 3.14192, soll = 3.14096, err = 0.000959999999999628 (real errh = 0.000327346410206708, real errl = 0.00063265358979292)
+2D Gaussian in unit circle: solh = 2.47248301174279, soll = 2.47186169125637, err = 0.000621320486419386 (real errh = 0.000242234023564158, real errl = 0.000379086462855227)
 2x2 cube (like 4 minecraft blocks): solh = 4, soll = 4, err = 0 (real errh = 0, real errl = 0)

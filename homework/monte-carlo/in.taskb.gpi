@@ -1,0 +1,17 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "N"
+set ylabel "err(N)"
+set grid
+set key outside right
+set title "Error for 2D Gaussian Function"
+set logscale y
+
+f(x)=1/sqrt(x)
+plot data1 skip 1 u 1:3 w l title "plainmc err estimate", \
+'' skip 1 u 1:4 w l title "plainmc real err", \
+data2 skip 1 u 1:4 w l title "quasimc err estimate (diff)", \
+'' skip 1 u 1:5 w l title "haltonmc real err", \
+'' skip 1 u 1:6 w l title "latticemc real err", \
+f(x) ls 7 title "1/sqrt(N)"
+

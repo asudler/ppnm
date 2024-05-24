@@ -1,0 +1,2 @@
+montecarlo: stratmc tests (n = 25000)
+unit circle area: sol = 3.14800982096521, err = 0.0172842939428512 (real err = 0.00641716737541209)
