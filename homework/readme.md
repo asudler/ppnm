@@ -1,11 +1,13 @@
-| # | ASSIGNMENT                        | A | B | C | TOTAL |
-|---|-----------------------------------|---|---|---|-------|
-| 1 | linear equations (lineq)          | 6 | 3 | 1 |  10   |
-| 2 | eigenvalues (evd)                 | 6 | 3 | 1 |  10   |
-| 3 | least squares (least-squares)     | 6 | 3 | 1 |  10   |
-| 4 | splines                           | 6 | 3 | 1 |  10   |
-| 5 | ODE                               | 6 | 3 | 1 |  10   |
-| 6 | adaptive integration (integration)| 6 | 3 | 1 |  10   |
-| 7 | monte carlo integration           | - | - | - |  -    |
-|...| ...                               |...|...|...|...    |
-|tot| total points                      | 24| 9 | 3 |  36   |
+| # | ASSIGNMENT                                    | A | B | C | TOTAL |
+|---|-----------------------------------------------|---|---|---|-------|
+| 1 | linear equations (lineq)                      | 6 | 3 | 1 |  10   |
+| 2 | eigenvalues (evd)                             | 6 | 3 | 1 |  10   |
+| 3 | least squares (least-squares)                 | 6 | 3 | 1 |  10   |
+| 4 | splines                                       | 6 | 3 | 1 |  10   |
+| 5 | ode                                           | 6 | 3 | 1 |  10   |
+| 6 | adaptive integration (integration)            | 6 | 3 | 1 |  10   |
+| 7 | monte carlo integration (monte-carlo)         | 6 | 3 | 1 |  10   |
+| 8 | root finding (roots)                          | - | - | - |  -    |
+| 9 | minimization                                  | - | - | - |  -    |
+| 10| artifitial neural networks (neural-networks)  | - | - | - |  -    |
+|tot| total points                                  | 69| 69| 69|  420  |
