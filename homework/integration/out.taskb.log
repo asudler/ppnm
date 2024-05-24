@@ -1,9 +1,9 @@
 ### C# Implementation ###
 abserr = 0.0001, relerr = 0.0001
 quad (17140 calls): ∫[0,1] dx 1/√(x) = 1.99999738796403, error estimate = 7.70897793161969E-05
-clenshaw_curtis (44 calls): ∫[0,1] dx 1/√(x) = 2.0000003990535, error estimate = 6.97819144992696E-05
+clenshaw_curtis (52 calls): ∫[0,1] dx 1/√(x) = 1.9999998903107, error estimate = 6.90012046991409E-05
 quad (29972 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999834899021, error estimate = 8.09348853471496E-05
-clenshaw_curtis (276 calls): ∫[0,1] dx ln(x)/√(x) = -3.9999984653788, error estimate = 8.43220310553941E-05
+clenshaw_curtis (272 calls): ∫[0,1] dx ln(x)/√(x) = -3.99999813339603, error estimate = 8.72530707646822E-05
 
 ### Python Implementation ###
 abserr = 0.0001, relerr = 0.0001
