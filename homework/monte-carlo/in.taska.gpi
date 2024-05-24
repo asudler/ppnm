@@ -10,5 +10,5 @@ set logscale y
 f(x)=1/sqrt(x)
 plot data skip 1 u 1:3 w l title "plainmc err estimate", \
 '' skip 1 u 1:4 w l title "plainmc real err", \
-f(x) title "1/sqrt(N)"
+f(x) title "1/sqrt(N)" w l lw 7
 

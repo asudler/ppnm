@@ -8,5 +8,6 @@ set title "stratmc sampled points, unit circle function"
 set xr [-1.2:1.2]
 set yr [-1.2:1.2]
 
-plot data u 1:2 w p pt 7 ps 0.5
+plot data u 1:2 w p pt 7 ps 0.5 title "sampled points"
+set object 1 circle at 0,0 size 1 fc rgb "red" lw 2
 
