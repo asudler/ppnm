@@ -3,6 +3,7 @@ set out outfile
 set xlabel "r (Bohr radius)"
 set ylabel "f(r) (Hartree)"
 set title "s-wave radial eq, Hydrogen"
+set datafile separator ","
 
 f(x)=x*exp(-x)
 plot data skip 1 u 1:2 w p title "rootfinding sol", \

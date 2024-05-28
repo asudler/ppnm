@@ -9,6 +9,7 @@ set logscale y
 set pm3d map
 set xr [0.0001:1]
 set yr [0.0001:1]
+set datafile separator ","
 
 splot data skip 1 u 1:2:3
 
