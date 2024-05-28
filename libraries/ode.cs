@@ -34,6 +34,7 @@ public static class ode {
         var (a, b) = interval; double x = a; double[] y = yi;
         var xlist = new List<double>(); xlist.Add(x);
         var ylist = new List<double[]>(); ylist.Add(y);
+        int counter = 0;
         if(method == "rk45") do {
             if(x >= b) return (xlist, ylist); // job done, breaks loop
             if(x + h > b) h = b - x; // last step should end at b
@@ -42,13 +43,13 @@ public static class ode {
             // (scipy tol, less rigid, see below)
             // double tol = acc + eps*norm(yh);
             double err = norm(yerr);
-            Error.Write($"ode: err={err} tol={tol} h={h}\n");
             if(err <= tol) { // accept step
                 x += h; y = yh;
                 xlist.Add(x);
                 ylist.Add(y);
             }
             h *= Min(Pow(tol/err, 0.25)*0.95, 2); // re-adjust stepsize
+            counter += 1;
         } while(true);
         if(method == "rk12") do {
             if(x >= b) return (xlist, ylist); // job done, breaks loop
@@ -58,7 +59,6 @@ public static class ode {
             // (scipy tol, less rigid, see below)
             // double tol = acc + eps*norm(yh);
             double err = norm(yerr);
-            Error.Write($"ode: err={err} tol={tol} h={h}\n");
             if(err <= tol) { // accept step
                 x += h; y = yh;
                 xlist.Add(x);
