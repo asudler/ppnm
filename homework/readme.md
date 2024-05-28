@@ -7,7 +7,7 @@
 | 5 | ode                                           | 6 | 3 | 1 |  10   |
 | 6 | adaptive integration (integration)            | 6 | 3 | 1 |  10   |
 | 7 | monte carlo integration (monte-carlo)         | 6 | 3 | 1 |  10   |
-| 8 | root finding (roots)                          | - | - | - |  -    |
+| 8 | root finding (roots)                          | 6 | 3 | 1 |  10   |
 | 9 | minimization                                  | - | - | - |  -    |
 | 10| artifitial neural networks (neural-networks)  | - | - | - |  -    |
 |tot| total points                                  | 69| 69| 69|  420  |

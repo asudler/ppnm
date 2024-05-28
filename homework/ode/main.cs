@@ -148,7 +148,6 @@ public static class main {
             xi3 = 0, yi3 = 0, zi3 = 0, dxi1 = 0, dyi1 = 0, dzi1 = 0,
             dxi2 = 0, dyi2 = 0, dzi2 = 0, dxi3 = 0, dyi3 = 0, dzi3 = 0,
             ti = 0, tf = 0, m1 = 1, m2 = 1, m3 = 1, G = 1, dt = 0;
-        bool interp = false;
         foreach(string arg in args) {
             var fields = arg.Split(":");
             if(fields[0] == "-xi1") xi1 = double.Parse(fields[1]);
