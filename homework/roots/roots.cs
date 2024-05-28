@@ -13,7 +13,8 @@ public static class roots {
         vector start,
         vector dx=null,
         double acc=1E-3,
-        double lambda_min=1.0/1024
+        double lambda_min=1.0/1024,
+        bool quadmin=false
     ) {
         vector x = start.copy(), fx = f(x), z, fz;
         do { // Newton's iterations
@@ -21,12 +22,22 @@ public static class roots {
             matrix J = jacobian(f, x, fx, dx);
             vector qr = solve(J, -fx);
             double lambda = 1;
-            do { // linear search
+            if(!quadmin) do { // linear search
                 z = x + lambda*qr;
                 fz = f(z);
                 if(fz.norm() < (1 - lambda/2)*fx.norm()) break;
                 if(lambda < lambda_min) break;
                 lambda /= 2;
+            } while(true);
+            else do { // sexy quadratic search
+                z = x + lambda*qr;
+                fz = f(z);
+                if(fz.norm() < (1 - lambda/2)*fx.norm()) break;
+                if(lambda < lambda_min) break;
+                double c = (0.5*fz.norm()*fz.norm() 
+                    - 0.5*f(x).norm()*f(x).norm() 
+                    + lambda*f(x).norm()*f(x).norm())/lambda/lambda;
+                lambda = f(x).norm()*f(x).norm()/2/c;
             } while(true);
             x = z; fx = fz;
         } while(true);

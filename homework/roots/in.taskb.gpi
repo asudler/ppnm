@@ -1,0 +1,10 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "r (Bohr radius)"
+set ylabel "f(r) (Hartree)"
+set title "s-wave radial eq, Hydrogen"
+
+f(x)=x*exp(-x)
+plot data skip 1 u 1:2 w p title "rootfinding sol", \
+f(x) title "exact sol" w l
+

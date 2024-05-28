@@ -1,0 +1,14 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "acc"
+set ylabel "eps"
+set cblabel "E0"
+set title "E0=0.5 goal"
+set logscale x
+set logscale y
+set pm3d map
+set xr [0.0001:1]
+set yr [0.0001:1]
+
+splot data skip 1 u 1:2:3
+
