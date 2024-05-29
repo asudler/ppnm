@@ -1,0 +1,2 @@
+finding the minimum of the 2D Rosenbrock function (nfev=20): mins[0]=0.999988569842979 mins[1]=0.999977121269742 f(min)=1.30682888146957E-10 (known sol at (x,y)=(1,1))
+finding a minimum of the Himmelblau function (nfev=4): mins[0]=-3.77931040571859 mins[1]=-3.28318604939573 f(min)=1.24801900495008E-12 (known sol at (x,y)=(-3.780,-3.283))

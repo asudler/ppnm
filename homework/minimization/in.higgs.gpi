@@ -1,0 +1,23 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "energy E [GeV]"
+set ylabel "signal σ(E) [certain units]"
+set title "Higgs Boson Discovery"
+set grid
+set key outside right
+
+load data2
+m1=m
+Gamma1=Gamma
+A1=A
+fit1(x)=A1/((x-m1)**2 + Gamma1*Gamma1/4)
+load data3
+m2=m
+Gamma2=Gamma
+A2=A
+fit2(x)=A2/((x-m2)**2 + Gamma2*Gamma2/4)
+
+plot data1 skip 1 u 1:2:3 w errorbars title "experimental data", \
+fit1(x) title "minimization fit", \
+fit2(x) title "minimization fit w central finite differencing"
+
