@@ -115,7 +115,7 @@ public static class minimization {
                 }
                 x[j] += dxj;
             }
-        } 
-	    return (H+H.T)/2; // you think? I hope so!
+        }
+        return (H+H.T)/2; // you think? I hope so!
     } // hessian
 } // minimization
