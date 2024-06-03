@@ -6,8 +6,19 @@ using static System.Math;
 public static class main {
     public static Func<double, double> g = x
         => Cos(5*x - 1) * Exp(-x*x);
+    public static Func<double, double> dg = x
+        => -2*x*Exp(-x*x)*Cos(1 - 5*x) + 5*Exp(-x*x)*Sin(1 - 5*x);
+    public static Func<double, double> d2g = x
+        => -25*Exp(-x*x)*Cos(1 - 5*x)
+            + (4*x*x*Exp(-x*x) - 2*Exp(-x*x))*Cos(1 - 5*x)
+            - 20*x*Exp(-x*x)*Sin(1 - 5*x);
 
-    public static void makedata(Func<double, double> f, string[] args) {
+    public static void makedata(
+        Func<double, double> f, 
+        Func<double, double> df,
+        Func<double, double> d2f,
+        string[] args
+    ) {
         double xi = 0, xf = 0; int n = 0;
         foreach(string arg in args) {
             var fields = arg.Split(":");
@@ -17,12 +28,12 @@ public static class main {
         }
         double dx = (xf - xi)/(n - 1);
         for(int i = 0; i < n; i++) {
-            Write($"{xi}\t{f(xi)}\n");
+            Write($"{xi}\t{f(xi)}\t{df(xi)}\t{d2f(xi)}\n");
             xi += dx;
         }
     } // makedata
 
-    public static void taska(string[] args) {
+    public static void interpolate(string[] args) {
         // get data
         List<double> x = new List<double>();
         List<double> y = new List<double>();
@@ -51,21 +62,22 @@ public static class main {
         ann swag = new ann(n_neurons);
         vector xv = new vector(x.ToArray()); 
         vector yv = new vector(y.ToArray());
-        Error.Write($"{n_neurons} {n_out} {xi} {xf}\n");
         swag.train(xv, yv);
-        double dx = (xf - xi)/(n_out - 1);
+        double dx = (xf - xi)/(n_out - 1), x0 = xi;
         Write($"nfev={swag.nfev}\n");
         for(int i = 0; i < n_out; i++) {
-            Write($"{xi}\t{swag.response(xi, swag.p)}\n");
+            Write($"{xi}\t{swag.response(xi, swag.p)}\t");
+            Write($"{swag.d_response(xi, swag.p)}\t");
+            Write($"{swag.d2_response(xi, swag.p)}\t");
+            Write($"{swag.integrate_response(xi, x0, swag.p)}\n");
             xi += dx;
         }
     } // taska
 
     public static int Main(string[] args) {
         foreach(string arg in args) {
-            if(arg == "-makedata") makedata(g, args);
-            if(arg == "-taska") taska(args);
-//            if(arg == "-taskb") taskb(args);
+            if(arg == "-makedata") makedata(g, dg, d2g, args);
+            if(arg == "-interpolate") interpolate(args);
 //            if(arg == "-taskc") taskc(args);
         }
         return 0;
