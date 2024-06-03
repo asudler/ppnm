@@ -3,6 +3,12 @@ LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 
+out.ann2.dat : main.exe
+	mono $< -ann2 2> $@
+
+out.ann.dat : main.exe
+	mono $< -ann 2> $@
+
 out.higgs.png : in.higgs.gpi in.higgs.dat out.taskb.dat out.taskc.dat
 	gnuplot -e "outfile='$@' ; data1='$(word 2,$^)' ; data2='$(word 3,$^)' ; \
 	data3='$(word 4,$^)'" $<

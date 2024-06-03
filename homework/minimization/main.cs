@@ -178,11 +178,74 @@ public static class main {
         Write($"A={mins[2]}\n");
     } // taskc
 
+    public static void ann() {
+        Func<vector, vector> g_rosenbrock = x
+            => new vector(-2*(1-x[0]) - 400*x[0]*(-x[0]*x[0] + x[1]),
+                200*(-x[0]*x[0] + x[1]));
+
+        // Rosenbrock
+        vector start = new vector(-1.0,-2.0);
+        Error.Write("finding the minimum of the 2D Rosenbrock function ");
+        (vector mins, int nfev) 
+            = newton(f_rosenbrock, start, g_rosenbrock);
+        Error.Write($"(nfev={nfev}): ");
+        for(int i = 0; i < mins.size; i++) {
+            Error.Write($"mins[{i}]={mins[i]} ");
+        }
+        Error.Write($"f(min)={f_rosenbrock(mins)} ");
+        Error.Write("(known sol at (x,y)=(1,1))\n");
+
+        /*/ Himmelblau
+        // note: here, the algorithm does not correctly identify minima
+        // for certain starting positions---perhaps it finds
+        // saddle points?
+        start[0] = -5.0; start[1] = -3.0;
+        Error.Write("finding a minimum of the Himmelblau function ");
+        (mins, nfev) = newton(f_himmelblau, start);
+        Error.Write($"(nfev={nfev}): ");
+        for(int i = 0; i < mins.size; i++) {
+            Error.Write($"mins[{i}]={mins[i]} ");
+        }
+        Error.Write($"f(min)={f_himmelblau(mins)} ");
+        Error.Write("(known sol at (x,y)=(-3.780,-3.283))\n");*/
+    } // ann
+
+    public static void ann2() {
+        // Rosenbrock
+        Error.Write("finding the minimum of the 2D Rosenbrock function ");
+        (vector mins, int nfev) 
+            = downhill_simplex(f_rosenbrock, 2);
+        Error.Write($"(nfev={nfev}): ");
+        for(int i = 0; i < mins.size; i++) {
+            Error.Write($"mins[{i}]={mins[i]} ");
+        }
+        Error.Write($"f(min)={f_rosenbrock(mins)} ");
+        Error.Write("(known sol at (x,y)=(1,1))\n");
+
+        /*/ Himmelblau
+        // note: here, the algorithm does not correctly identify minima
+        // for certain starting positions---perhaps it finds
+        // saddle points?
+        start[0] = -5.0; start[1] = -3.0;
+        Error.Write("finding a minimum of the Himmelblau function ");
+        (mins, nfev) = newton(f_himmelblau, start);
+        Error.Write($"(nfev={nfev}): ");
+        for(int i = 0; i < mins.size; i++) {
+            Error.Write($"mins[{i}]={mins[i]} ");
+        }
+        Error.Write($"f(min)={f_himmelblau(mins)} ");
+        Error.Write("(known sol at (x,y)=(-3.780,-3.283))\n");*/
+    } // ann
+
+
+
     public static int Main(string[] args) {
         foreach(string arg in args) {
             if(arg == "-taska") taska();
             if(arg == "-taskb") taskb(args);
             if(arg == "-taskc") taskc(args);
+            if(arg == "-ann") ann();
+            if(arg == "-ann2") ann2();
         }
         return 0;
     } // Main
