@@ -72,7 +72,7 @@ public static class main {
             Write($"{swag.integrate_response(xi, x0, swag.p)}\n");
             xi += dx;
         }
-    } // taska
+    } // interpolate
 
     public static int Main(string[] args) {
         foreach(string arg in args) {
