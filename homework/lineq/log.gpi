@@ -1,13 +1,13 @@
 \
 	set terminal png background "white" ; \
-	set out "out.times.png" ; \
+	set out "out.time.png" ; \
 	set xlabel "N (size of matrix)" ; \
 	set ylabel "real time (s)" ; \
 	set title "real time vs N" ; \
 	f(x)=A*x**3+bg ; \
 	A=5e-9 ; \
 	bg=0.02 ; \
-	fit f(x) "out.times.data" via A, bg ; \
-	plot "out.times.data" u 1:2 w lp title "real time" , \
+	fit f(x) "out.time.dat" via A, bg ; \
+	plot "out.time.dat" u 1:2 w lp title "real time" , \
 	f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 

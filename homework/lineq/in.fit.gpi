@@ -1,0 +1,25 @@
+set terminal pngcairo size 1024, 768 background "white"
+set out outfile
+set xlabel "N (size of matrix)" 
+set ylabel "real time (s)"
+set title "real time vs N"
+set grid
+set key outside right
+
+f1(x)=A1*x**3+bg1
+A1=5e-9
+bg1=0.02
+fit f(x) qrinput via A1, bg1 
+save fit qrfit
+
+f2(x)=A2*x**3+bg2
+A2=3e-9
+bg2=0.02
+fit f2(x) luinput via A2, bg2
+save fit lufit
+
+p qrdat u 1:2 w p title "QR decomposition data", \
+f1(x) title "QR data cubic fit f(x)=A*x**3+bg", \
+ludat u 1:2 w p title "LU decomposition data", \
+f2(x) title "LU data cubic fit f(x)=A*x**3+bg"
+
