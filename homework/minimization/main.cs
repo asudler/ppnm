@@ -237,8 +237,6 @@ public static class main {
         Error.Write("(known sol at (x,y)=(-3.780,-3.283))\n");*/
     } // ann
 
-
-
     public static int Main(string[] args) {
         foreach(string arg in args) {
             if(arg == "-taska") taska();

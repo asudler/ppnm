@@ -1,0 +1,4 @@
+# fit f1(x) qrdat via A1, bg1 
+# final sum of squares of residuals : 0.0157704
+A1              = 5.66106455786109e-09  
+bg1             = 0.00822551015875349   
