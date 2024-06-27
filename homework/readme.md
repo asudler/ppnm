@@ -9,5 +9,5 @@
 | 7 | monte carlo integration (monte-carlo)         | 6 | 3 | 1 |  10   |
 | 8 | root finding (roots)                          | 6 | 3 | 1 |  10   |
 | 9 | minimization                                  | 6 | 3 | 1 |  10   |
-| 10| artificial neural networks (neural-networks)  | 6 | 3 | :(|   9   |
+| 10| artificial neural networks (neural-networks)  | 6 | 3 | 0 |   9   |
 |tot| total points                                  | 60| 30| 9 |  99   |

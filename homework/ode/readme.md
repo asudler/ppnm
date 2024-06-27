@@ -1,4 +1,6 @@
-# 2024-05-06
+**a.** see out.oscillator.png, out.lotkavolterra.png
+**b.** see out.planets.png
+**c.** see out.threebody_interp.gif
 
 A few comments regarding this assigment:
 * _task (b)_: planet1 is the circular Newtonian orbit, planet2 is the elliptical Newtonian orbit, and---believe it or not---planet3 is the orbit with relativistic precession. The plot contains an image with all three datasets.

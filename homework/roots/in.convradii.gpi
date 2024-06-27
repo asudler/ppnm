@@ -5,7 +5,7 @@ set ylabel "rmax"
 set xr [0.0025:0.25]
 set yr [3:15]
 set cblabel "E0"
-set title "E0=0.5 goal"
+set title "E0=-0.5 goal"
 set logscale x
 set logscale y
 set pm3d map

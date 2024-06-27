@@ -1,0 +1,20 @@
+debug: checking lu decomposition routine below
+initializing a real 25x10 matrix A with random entries between 0 and 1...done
+factorizing A into QR...done
+checking that R is upper-triangular...passed
+checking that Q.transpose()*Q = 1...passed
+checking that Q*R = A...passed
+
+debug: checking solve below
+generating a square matrix AA...initializing a vector b of the same length as AA with random entries between 0 and 1...done
+checking solve method (which includes decomposing matrix AA)...passed
+checking that AA*x = b...passed
+
+debug: checking inverse below
+calculating and checking inverse of AA...passed
+
+debug: checking determinant properties below
+det(AA)*det(AA^{-1}) = 1...passed
+det(c*AA) = c^n*det(AA)...passed
+det(AA) = 1/det(AA^{-1})...passed
+

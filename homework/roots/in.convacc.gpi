@@ -3,7 +3,7 @@ set out outfile
 set xlabel "acc"
 set ylabel "eps"
 set cblabel "E0"
-set title "E0=0.5 goal"
+set title "E0=-0.5 goal"
 set logscale x
 set logscale y
 set pm3d map

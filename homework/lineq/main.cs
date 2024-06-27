@@ -101,23 +101,23 @@ public class main {
         Error.Write("det(AA)*det(AA^{-1}) = 1...");
         test = true;
         if(1.0 != Math.Round(determinant(AA)*determinant(B),4)) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n");
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n");
 
         Error.Write("det(c*AA) = c^n*det(AA)...");
         test = true;
         double c = rnd.NextDouble();
         if(Math.Round(determinant(c*AA),4) 
             != Math.Round(Math.Pow(c,n)*determinant(AA),4)) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n");
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n");
 
         Error.Write("det(AA) = 1/det(AA^{-1})...");
         test = true;
         if(Math.Round(determinant(AA),1)
             != Math.Round(1/determinant(B),1)) test = false;
-        if(test) Write("passed\n");
-        else Write("womp womp\n");
+        if(test) Error.Write("passed\n");
+        else Error.Write("womp womp\n");
         Error.WriteLine();
     } // debug
 

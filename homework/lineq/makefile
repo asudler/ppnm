@@ -24,8 +24,8 @@ out.time.dat : main.exe
 		mono $< -time -n:$$N ; \
 	done
 
-out.debug.dat : main.exe
-	mono $< -debug -n:25 -m:10
+out.debug.log : main.exe
+	mono $< -debug -n:25 -m:10 2> $@
 
 main.exe : main.cs qrgs.dll ; $(MKEXE)
 qrgs.dll : qrgs.cs matrix.cs vector.cs ; $(MKLIB)
