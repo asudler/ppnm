@@ -14,7 +14,7 @@ out.time.dat : main.exe
 		mono $< -time -n:$$N ; \
 	done
 
-out.debug.dat : main.exe
+out.debug.log : main.exe
 	mono $< -debug -n:25 2> $@
 
 main.exe : main.cs lu.dll ; $(MKEXE)

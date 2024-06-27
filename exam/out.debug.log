@@ -1,0 +1,20 @@
+debug: checking lu decomposition routine below
+initializing a real 25x25 matrix A with random entries between 0 and 1...done
+factorizing A into LU...done
+checking that L is lower-triangular...passed
+checking that U is upper-triangular...passed
+checking that L*U = A...passed
+
+debug: checking solve below
+initializing a vector b of the same length as A with random entries between 0 and 1...done
+checking solve method (which includes decomposing matrix A)...passed
+checking that A*x = b...passed
+
+debug: checking inverse below
+calculating and checking inverse of A...passed
+
+debug: checking determinant properties below
+det(A)*det(A^{-1}) = 1...passed
+det(c*A) = c^n*det(A)...passed
+det(A) = 1/det(A^{-1})...passed
+
