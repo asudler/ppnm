@@ -14,6 +14,9 @@ out.time.dat : main.exe
 		mono $< -time -n:$$N ; \
 	done
 
+out.debug_pivots.log : main.exe
+	mono $< -debug -n:25 -row_pivots:true 2> $@
+
 out.debug.log : main.exe
 	mono $< -debug -n:25 2> $@
 

@@ -1,14 +1,30 @@
 using System;
+using static matrix;
 
 public static class lu {
     /* decomp:
      * performs the LU factorization
-     * of a real square matrix
+     * of a real square matrix.
+     * returns L, U, and the permutation matrix P
+     * (P is identity matrix if it's not needed)
      * (see Fedorov 2024, p. 23-24 */
-    public static (matrix, matrix) decomp(matrix A) {
+    public static (matrix, matrix, matrix) decomp(matrix A) {
         if(A.size1 != A.size2) throw new Exception("input matrix not square");
         matrix L = new matrix(A.size1, A.size1),
-               U = new matrix(A.size1, A.size1);
+               U = new matrix(A.size1, A.size1),
+               P = id(A.size1);
+
+        // row pivoting if necessary
+        if(approx(A[0,0], 0.0)) {
+            int rpiv = Array.IndexOf((double[])A[0], A[0].max());
+            if(approx(A[0][rpiv], 0.0))
+                throw new Exception("input matrix cannot be LU decomposed");
+            P[0,0] = 0;
+            P[0,rpiv] = 1;
+            P[rpiv,0] = 1;
+            P[rpiv,rpiv] = 0;
+            A = P*A;
+        }
 
         // Doolittle's algorithm
         // consider adding pivot mechanism in future versions
@@ -25,16 +41,16 @@ public static class lu {
                 L[j,i] = 1/U[i,i]*(A[j,i] - sum);
             }
         }
-        return (L, U);
+        return (L, U, P);
     } // decomp
 
     /* solve:
      * Ax = b ==> LUx = b can be solved in two stages,
      * (1) Ly = b for y with forward sub, then 
      * (2) Ux = y for x with backward sub */
-    public static vector solve(matrix A, vector b) {
+    public static (vector, matrix) solve(matrix A, vector b) {
         if(b.size != A.size2) throw new Exception("invalid b dims");
-        (matrix L, matrix U) = decomp(A);
+        (matrix L, matrix U, matrix P) = decomp(A);
         vector x = new vector(A.size1), y = new vector(A.size1);
         for(int i = 0; i < b.size; i++) {
             double sum = 0;
@@ -46,7 +62,7 @@ public static class lu {
             for(int j = i + 1; j < b.size; j++) sum += U[i,j]*x[j];
             x[i] = (y[i] - sum)/U[i,i];
         } // back sub
-        return x;
+        return (x, P);
     } // solve
 
     /* determinant:
@@ -63,15 +79,16 @@ public static class lu {
 
     /* inverse:
      * returns the inverse matrix of the non-singular square matrix A */
-    public static matrix inverse(matrix A) {
+    public static (matrix, matrix) inverse(matrix A) {
         matrix inverse = new matrix(A.size1, A.size2);
+        matrix P = decomp(A).Item3;
         for(int i = 0; i < A.size1; i++) {
             vector e = new vector(A.size1);
             e.set_zero();
             e[i] = 1;
-            vector sol = solve(A, e);
+            vector sol = solve(A, e).Item1;
             inverse[i] = sol;
         }
-        return inverse;
+        return (inverse, P);
     } // inverse
 } // lu

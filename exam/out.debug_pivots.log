@@ -1,6 +1,6 @@
 debug: checking lu decomposition routine below
 initializing a real 25x25 matrix A with random entries between 0 and 1...done
-determining the nature of the permutation matrix P...permutation matrix P unnecessary, i.e. P = I
+determining the nature of the permutation matrix P...permutation matrix P needed, i.e. P != I
 factorizing P*A into LU...done
 checking that L is lower-triangular...passed
 checking that U is upper-triangular...passed

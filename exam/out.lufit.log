@@ -1,4 +1,4 @@
 # fit f2(x) ludat via A2, bg2
-# final sum of squares of residuals : 0.0106708
-A2              = 1.78647172079599e-09  
-bg2             = 0.012136141026574     
+# final sum of squares of residuals : 0.0111971
+A2              = 1.82668015079053e-09  
+bg2             = 0.0124075561556499    

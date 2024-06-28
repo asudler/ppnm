@@ -34,3 +34,39 @@ correlation matrix of the fit parameters:
                 A      bg     
 A               1.000 
 bg             -0.671  1.000 
+
+
+*******************************************************************************
+Fri Jun 28 13:56:26 2024
+
+
+FIT:    data read from "out.time.dat"
+        format = z
+        #datapoints = 234
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x)=A*x**3+bg
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   A             bg           
+   0 7.1738156724e-01   0.00e+00  2.97e-01    5.000000e-09   2.000000e-02
+   4 6.6090916044e-02  -1.14e-07  2.97e-05    5.723229e-09   6.861678e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.0660909
+rel. change during last iteration : -1.13851e-12
+
+degrees of freedom    (FIT_NDF)                        : 232
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0168782
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000284875
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+A               = 5.72323e-09      +/- 1.775e-11    (0.3101%)
+bg              = 0.00686168       +/- 0.001489     (21.69%)
+
+correlation matrix of the fit parameters:
+                A      bg     
+A               1.000 
+bg             -0.671  1.000 

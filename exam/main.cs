@@ -1,13 +1,15 @@
 using System;
 using static System.Console;
 using static lu;
+using static matrix;
 
 public class main {
     public static void debug(string[] args) {
-        int n = 0;
+        int n = 0; bool row_pivots = false;
         foreach(string arg in args) {
             var fields = arg.Split(":");
             if(fields[0] == "-n") n = int.Parse(fields[1]);
+            if(fields[0] == "-row_pivots") row_pivots = bool.Parse(fields[1]);
         }
         if(n == 0) throw new Exception("specify matrix dims. in makefile\n");
 
@@ -21,10 +23,21 @@ public class main {
                 A[i,j] = rnd.NextDouble();
             }
         }
+        if(row_pivots) A[0,0] = 0;
         Error.Write("done\n");
 
-        Error.Write("factorizing A into LU...");
-        (matrix L, matrix U) = decomp(A);
+        Error.Write("determining the nature of the permutation matrix P...");
+        if(approx(A[0,0], 0.0)) {
+            Error.Write("permutation matrix P needed, i.e. ");
+            Error.Write("P != I\n");
+        }
+        else {
+            Error.Write("permutation matrix P unnecessary, i.e. ");
+            Error.Write("P = I\n");
+        }
+
+        Error.Write("factorizing P*A into LU...");
+        (matrix L, matrix U, matrix P) = decomp(A);
         Error.Write("done\n");
 
         Error.Write("checking that L is lower-triangular...");
@@ -49,43 +62,42 @@ public class main {
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
 
-        Error.Write("checking that L*U = A...");
+        Error.Write("checking that L*U = P*A...");
         test = true;
-        if(!A.approx(L*U)) test = false;
+        if(!(P*A).approx(L*U)) test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
         Error.WriteLine();
 
         Error.Write("debug: checking solve below\n");
-        Error.Write("initializing a vector b of the same length as A with ");
+        Error.Write("initializing a vector b of the same length as P*A with ");
         Error.Write("random entries between 0 and 1...");
         vector b = new vector(n);
         for(int i = 0; i < n; i++) b[i] = rnd.NextDouble();
         Error.Write("done\n");
 
         Error.Write("checking solve method (which ");
-        Error.Write("includes decomposing matrix A)...");
-        vector sol = solve(A, b);
+        Error.Write("includes decomposing matrix P*A)...");
+        vector sol = solve(A, b).Item1;
         vector check = decomp(A).Item1*decomp(A).Item2*sol;
         test = true;
         if(!b.approx(check)) test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
 
-        Error.Write("checking that A*x = b...");
+        Error.Write("checking that P*A*x = b...");
         test = true;
-        if(!b.approx(A*sol)) test = false;
+        if(!b.approx(P*A*sol)) test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
         Error.WriteLine();
 
         Error.Write("debug: checking inverse below\n");
-        Error.Write("calculating and checking inverse of A...");
-        matrix B = inverse(A);
-        matrix I = new matrix(n, n);
-        I.set_identity();
+        Error.Write("calculating and checking inverse of P*A...");
+        matrix B = inverse(A).Item1;
+        matrix I = matrix.id(n);
         test = true;
-        if(!I.approx(A*B)) test = false;
+        if(!I.approx(P*A*B)) test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
         Error.WriteLine();
@@ -93,22 +105,22 @@ public class main {
         Error.Write("debug: checking determinant properties below\n");
         Error.Write("det(A)*det(A^{-1}) = 1...");
         test = true;
-        if(1.0 != Math.Round(determinant(A)*determinant(B),4)) test = false;
+        if(!approx(determinant(A)*determinant(B), 1.0)) test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
 
         Error.Write("det(c*A) = c^n*det(A)...");
         test = true;
         double c = rnd.NextDouble();
-        if(Math.Round(determinant(c*A),4) 
-            != Math.Round(Math.Pow(c,n)*determinant(A),4)) test = false;
+        if(!approx(determinant(c*A), Math.Pow(c,n)*determinant(A))) 
+            test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
 
         Error.Write("det(A) = 1/det(A^{-1})...");
         test = true;
-        if(Math.Round(determinant(A),1)
-            != Math.Round(1/determinant(B),1)) test = false;
+        if(!approx(determinant(A), 1/determinant(B))) 
+            test = false;
         if(test) Error.Write("passed\n");
         else Error.Write("womp womp\n");
         Error.WriteLine();
