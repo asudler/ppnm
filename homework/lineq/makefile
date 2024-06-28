@@ -14,7 +14,7 @@ out.time.png : out.time.dat makefile
 		A=5e-9 ; \
 		bg=0.02 ; \
 		fit f(x) "$<" via A, bg ; \
-		plot "$<" u 1:2 w lp title "real time" , \
+		plot "$<" u 1:2 w p title "real time" , \
 		f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 	' | tee log.gpi | gnuplot
 

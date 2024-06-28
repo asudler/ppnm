@@ -8,6 +8,6 @@
 	A=5e-9 ; \
 	bg=0.02 ; \
 	fit f(x) "out.time.dat" via A, bg ; \
-	plot "out.time.dat" u 1:2 w lp title "real time" , \
+	plot "out.time.dat" u 1:2 w p title "real time" , \
 	f(x) title "cubic fit f(x)=A*x**3 + bg" ; \
 
