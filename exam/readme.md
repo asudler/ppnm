@@ -10,7 +10,7 @@ _Implement the LU-decomposition of a real square matrix. Implement also the corr
 
 The LU decomposition routine is faster than the QRGS decomposition routine. Comparing the fit parameters, it looks like the LU routine takes 1/3 the time of the QRGS routine. This makes sense since the complexity of the QRGS routine for real square matrices is $O(n^3)$ and for LU decomposition it is $\frac{1}{3} O(n^3)$ when counted in the same way.
 
-**SELF-EVAL:** 9 out of 10. I answered every part of the examination prompt thoroughly, no problems there. My algorithm even accounts for edge cases where row pivoting might be necessary. But I am sure the algorithm could be improved or tested even more rigorously, and it also feels a bit conceited to give myself a 10. Thus I will be content with a 9!
+**SELF-EVAL:** 9 out of 10. I answered every part of the examination prompt thoroughly, no problems there. My algorithm even accounts for edge cases where row pivoting might be necessary. But I am sure the algorithm could be improved or tested even more rigorously, and it also feels a bit conceited to give myself a 10 when no objective evaluation criteria exists. Thus I will be content with a 9!
 
 note: some of the checks fail for larger n due to machine rounding errors
 
